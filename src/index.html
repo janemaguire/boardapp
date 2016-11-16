@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="boardApp">
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -8,7 +8,18 @@
     <script src="/js/vendor.js" charset="utf-8"></script>
     <script src="/js/app.js" charset="utf-8"></script>
   </head>
-  <body>
-    <h1>Project 3</h1>
+  <body ng-controller="MainController as main">
+    <header>
+      <nav>
+        <ul class="nav nav-tabs">
+          <li ng-if="!main.isLoggedIn()" class="nav-item"><a ui-sref="register" ui-sref-active="active" class="nav-link">Register</a></li>
+          <li ng-if="!main.isLoggedIn()" class="nav-item"><a ui-sref="login" ui-sref-active="active" class="nav-link">Login</a></li>
+          <li ng-if="main.isLoggedIn()" class="nav-item"><a ng-click="main.logout()" class="nav-link">Logout</a></li>
+        </ul>
+      </nav>
+      <p ng-if="main.message">{{ main.message }}</p>
+    </header>
+    <main ui-view>
+    </main>
   </body>
 </html>

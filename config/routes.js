@@ -2,7 +2,8 @@ const router = require('express').Router();
 const authController = require('../controllers/auth');
 const boardsController = require('../controllers/boards');
 const pinsController = require('../controllers/pins');
-const usersController = require('../controller/users');
+const usersController = require('../controllers/users');
+const secureRoute = require('../lib/secureRoute');
 
 router
   .post('/login', authController.login)
@@ -10,30 +11,30 @@ router
 
 //BOARD ROUTES
 router.route('/boards')
-  .get(boardsController.index)
-  .post(boardsController.create);
+  .get(secureRoute, boardsController.index)
+  .post(secureRoute, boardsController.create);
 
 router.route('/boards/:id')
-  .get(boardsController.show)
-  .put(boardsController.update)
-  .delete(boardsController.delete);
+  .get(secureRoute, boardsController.show)
+  .put(secureRoute, boardsController.update)
+  .delete(secureRoute, boardsController.delete);
 
 //PIN ROUTES
 router.route('/pins')
-  .get(pinsController.index)
-  .post(pinsController.create);
+  .get(secureRoute, pinsController.index)
+  .post(secureRoute, pinsController.create);
 
 router.route('/pins/:id')
-  .get(pinsController.show)
-  .put(pinsController.update)
-  .delete(pinsController.delete);
+  .get(secureRoute, pinsController.show)
+  .put(secureRoute, pinsController.update)
+  .delete(secureRoute, pinsController.delete);
 
 router.route('/users')
-  .get(usersController.index);
+  .get(secureRoute, usersController.index);
 
 router.route('/users/:id')
-  .get(usersController.show)
-  .put(usersController.update)
-  .delete(usersController.delete);
+  .get(secureRoute, usersController.show)
+  .put(secureRoute, usersController.update)
+  .delete(secureRoute, usersController.delete);
 
 module.exports = router;

@@ -7,13 +7,6 @@ function usersIndex(req, res) {
   });
 }
 
-function usersCreate(req, res) {
-  User.create(req.body, (err, user) => {
-    if(err) return res.status(400).json({ error: err });
-    return res.json(user);
-  });
-}
-
 function usersShow(req, res) {
   User.findById(req.params.id, (err, user) => {
     if(err) return res.status(500).json({ error: err });
@@ -53,7 +46,6 @@ function usersDelete(req, res) {
 
 module.exports = {
   index: usersIndex,
-  create: usersCreate,
   show: usersShow,
   update: usersUpdate,
   delete: usersDelete
