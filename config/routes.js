@@ -16,8 +16,8 @@ router.route('/boards')
 
 router.route('/boards/:id')
   .get(boardsController.show)
-  .put(secureRoute, boardsController.update)
-  .delete(secureRoute, boardsController.delete);
+  .get(secureRoute, boardsController.index)
+  .post(secureRoute, boardsController.create);
 
 //PIN ROUTES
 router.route('/pins')
@@ -26,16 +26,16 @@ router.route('/pins')
 
 router.route('/pins/:id')
   .get(pinsController.show)
-  .put(secureRoute, pinsController.update)
-  .delete(secureRoute, pinsController.delete);
+  .get(secureRoute, pinsController.index)
+  .post(secureRoute, pinsController.create);
 
 //USER ROUTES
 router.route('/users')
-  .get(usersController.index);
+  .get(secureRoute, usersController.index);
 
 router.route('/users/:id')
-  .get(usersController.show)
-  .put(usersController.update)
-  .delete(usersController.delete);
+  .get(secureRoute, usersController.show)
+  .put(secureRoute, usersController.update)
+  .delete(secureRoute, usersController.delete);
 
 module.exports = router;
