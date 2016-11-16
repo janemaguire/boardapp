@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const boardsSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true},
-  // entities: { type: [pin.all], required: true, trim: true},
+  pins: [{type: mongoose.Schema.ObjectId, ref: 'Pin'}],
   tags: [{type: String, required: true, trim: true}]
   // users: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 });
