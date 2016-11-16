@@ -1,2 +1,2 @@
-"use strict";console.log("JS loaded");
+"use strict";
 //# sourceMappingURL=app.js.map
