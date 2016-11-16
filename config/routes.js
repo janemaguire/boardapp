@@ -2,7 +2,8 @@ const router = require('express').Router();
 const authController = require('../controllers/auth');
 const boardsController = require('../controllers/boards');
 const pinsController = require('../controllers/pins');
-const usersController = require('../controller/users');
+const usersController = require('../controllers/users');
+const secureRoute = require('../lib/secureRoute');
 
 router
   .post('/login', authController.login)
@@ -11,23 +12,24 @@ router
 //BOARD ROUTES
 router.route('/boards')
   .get(boardsController.index)
-  .post(boardsController.create);
+  .post(secureRoute, boardsController.create);
 
 router.route('/boards/:id')
   .get(boardsController.show)
-  .put(boardsController.update)
-  .delete(boardsController.delete);
+  .put(secureRoute, boardsController.update)
+  .delete(secureRoute, boardsController.delete);
 
 //PIN ROUTES
 router.route('/pins')
   .get(pinsController.index)
-  .post(pinsController.create);
+  .post(secureRoute, pinsController.create);
 
 router.route('/pins/:id')
   .get(pinsController.show)
-  .put(pinsController.update)
-  .delete(pinsController.delete);
+  .put(secureRoute, pinsController.update)
+  .delete(secureRoute, pinsController.delete);
 
+//USER ROUTES
 router.route('/users')
   .get(usersController.index);
 

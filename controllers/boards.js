@@ -8,6 +8,9 @@ function boardsIndex(req, res) {
 }
 
 function boardsCreate(req, res) {
+
+  req.body.user = req.user;
+
   Board.create(req.body, (err, board) => {
     if(err) return res.status(400).json({ error: err });
     return res.json(board);
@@ -20,7 +23,7 @@ function boardsShow(req, res) {
   .exec((err, board) => {
     if(err) return res.status(500).json({ error: err });
     if(!board) return res.status(404).json({ error: 'Not found' });
-    
+
     return res.json(board);
   });
 }
