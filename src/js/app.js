@@ -29,4 +29,8 @@ function Auth($authProvider) {
   $authProvider.signupUrl = '/register';
 
   $authProvider.tokenPrefix = '';
+
+  $authProvider.facebook({
+    clientId: '592951794244851'
+  });
 }

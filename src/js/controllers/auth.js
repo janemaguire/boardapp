@@ -30,6 +30,13 @@ function LoginController($auth, $state) {
       });
   }
 
+  function authenticate(service) {
+    $auth.authenticate(service, () => {
+      $state.go('test');
+    });
+  }
+
+  login.authenticate = authenticate;
   login.submit = submit;
 
 }
