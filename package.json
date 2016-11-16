@@ -6,6 +6,7 @@
   "dependencies": {
     "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
+    "bower": "^1.8.0",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
     "jsonwebtoken": "^7.1.9",
@@ -31,5 +32,12 @@
     "gulp-uglify": "^2.0.0",
     "gulp-wait": "0.0.2",
     "main-bower-files": "^2.13.1"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "postinstall": "bower install"
+  },
+  "engines": {
+    "node": "6.8.0"
   }
 }
