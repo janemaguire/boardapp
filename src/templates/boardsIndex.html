@@ -1,0 +1,9 @@
+<section>
+  <ul>
+    <li ng-repeat="board in boardsIndex.all">
+      <a ui-sref="boardsShow({ id: board._id })">
+        <h2>{{ board.title }}</h2>
+      </a>
+    </li>
+  </ul>
+</section>
