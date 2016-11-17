@@ -1,3 +1,29 @@
+<<<<<<< HEAD
 // body {
 //   background: $body-background-color;
 // }
+=======
+@import'partials/normalize';
+@import'bourbon/bourbon';
+@import'neat/neat';
+@import'base/base';
+
+body {
+  background-color: skyblue;
+}
+
+img {
+  max-width: 100%;
+}
+
+main {
+  @include outer-container;
+}
+
+.board {
+  li {
+    @include span-columns(3);
+    @include omega(4n);
+  }
+}
+>>>>>>> 64999250b53235adf327dcc4caeac641c6c8efc7
