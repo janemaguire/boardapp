@@ -47,8 +47,11 @@ function Router($stateProvider, $urlRouterProvider) {
 
 Auth.$inject = ['$authProvider'];
 function Auth($authProvider) {
+  $authProvider.tokenPrefix = '';
   $authProvider.loginUrl = '/login';
   $authProvider.signupUrl = '/register';
 
-  $authProvider.tokenPrefix = '';
+  $authProvider.facebook({
+    clientId: '592951794244851'
+  });
 }
