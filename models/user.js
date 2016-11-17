@@ -2,8 +2,10 @@ const mongoose  = require('mongoose');
 const bcrypt    = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
+  facebookId: { type: String },
   username: { type: String, unique: true, required: true },
   email: { type: String, unique: true, required: true },
+  profileImage: { type: String },
   passwordHash: { type: String }
 });
 
@@ -21,7 +23,7 @@ function validatePassword(password){
 
 function preValidate(next) {
   if (this.isNew) {
-    if (!this._password) {
+    if (!this._password && !this.facebookId) {
       this.invalidate('password', 'A password is required.');
     }
   }
@@ -38,12 +40,12 @@ function preValidate(next) {
   next();
 }
 
-function preSave(next) {
+function preSave(done) {
   if(this._password) {
     this.passwordHash = bcrypt.hashSync(this._password, bcrypt.genSaltSync(8));
   }
 
-  next();
+  done();
 }
 
 userSchema
