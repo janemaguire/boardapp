@@ -8,7 +8,8 @@ const secureRoute = require('../lib/secureRoute');
 router
   .post('/login', authController.login)
   .post('/register', authController.register)
-  .post('/auth/facebook', oauthController.facebook);
+  .post('/auth/facebook', oauthController.facebook)
+  .post('/auth/instagram', oauthController.instagram);
 
 //BOARD ROUTES
 router.route('/boards')
