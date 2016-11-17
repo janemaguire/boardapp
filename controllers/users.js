@@ -43,7 +43,6 @@ function usersDelete(req, res) {
   });
 }
 
-
 module.exports = {
   index: usersIndex,
   show: usersShow,
