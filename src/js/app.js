@@ -64,4 +64,8 @@ function Auth($authProvider) {
   $authProvider.facebook({
     clientId: '592951794244851'
   });
+
+  $authProvider.instagram({
+    clientId: '64171eadf0914dd7bf7839bc034e42e0'
+  });
 }
