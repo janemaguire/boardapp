@@ -50,6 +50,11 @@ function Router($stateProvider, $urlRouterProvider) {
      url: '/pins/:id',
      templateUrl: '/templates/pinsShow.html',
      controller: 'PinsShowController as pinsShow'
+   })
+   .state('userBoards', {
+     url: '/user/:id',
+     templateUrl: '/templates/userBoards.html',
+     controller: 'BoardsShowController as boardsShow'
    });
 
   $urlRouterProvider.otherwise('/');
