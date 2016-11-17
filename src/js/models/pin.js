@@ -3,7 +3,7 @@ angular.module('boardApp')
 
 Pin.$inject = ['$resource'];
 function Pin ($resource) {
-  return new $resource('/pins/:id', { id: '@_id' }, {
+  return new $resource('/boards/:boardId/pins/:id', { id: '@_id' }, {
     update: { method: 'PUT' }
   });
 }

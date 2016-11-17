@@ -30,6 +30,7 @@ BoardsShowController.$inject = ['Board', 'Pin', '$state'];
 function BoardsShowController(Board, Pin, $state) {
   const boardsShow = this;
   boardsShow.formVisible = false;
+  boardsShow.formEditVisible = false;
   boardsShow.board = Board.get($state.params);
 
   function deleteBoard() {
@@ -44,31 +45,47 @@ function BoardsShowController(Board, Pin, $state) {
   //PIN CONTROLLER
   boardsShow.newPin = {};
 
-  function showForm() {
+  function showCreateForm() {
     boardsShow.formVisible = true;
   }
 
-  function hideForm() {
+  function hideCreateForm() {
     boardsShow.formVisible = false;
     boardsShow.newPin = {};
   }
 
-  boardsShow.showForm = showForm;
-  boardsShow.hideForm = hideForm;
+  boardsShow.showCreateForm = showCreateForm;
+  boardsShow.hideCreateForm = hideCreateForm;
 
   function createPin() {
     boardsShow.pin.boardId = $state.params.id;
     Pin.save(boardsShow.pin, () => {
-      hideForm();
+      hideCreateForm();
       boardsShow.board = Board.get($state.params);
       console.log(boardsShow.pin);
     });
   }
 
-  function showPin() {
-    console.log('clicked!');
+  function showEditForm(pin) {
+    // console.log('TRUE!');
+    // console.log('this: ',boardsShow.board.pins);
+    boardsShow.formEditVisible = true;
+    boardsShow.currentPin = pin;
   }
 
+  function hideEditForm() {
+    boardsShow.formEditVisible = false;
+  }
+
+  function showPin(pin) {
+    console.log('clicked!', pin);
+
+    showEditForm(pin);
+  }
+
+
+  boardsShow.showEditForm = showEditForm;
+  boardsShow.hideEditForm = hideEditForm;
   boardsShow.createPin = createPin;
   boardsShow.showPin = showPin;
 }

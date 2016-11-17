@@ -17,9 +17,7 @@ function boardsCreate(req, res) {
 }
 
 function boardsShow(req, res) {
-  Board.findById(req.params.id)
-  .populate('pins')
-  .exec((err, board) => {
+  Board.findById(req.params.id, (err, board) => {
     if(err) return res.status(500).json({ error: err });
     if(!board) return res.status(404).json({ error: 'Not found' });
 
@@ -55,10 +53,84 @@ function boardsDelete(req, res) {
   });
 }
 
+function pinIndex(req, res) {
+  Board.findById(req.params.id, (err, board) => {
+    if(err) return res.status(500).json({ error: err });
+    if(!board) return res.status(404).json({ error: 'Not found' });
+    res.json(board.pins);
+  });
+}
+
+function pinCreate(req, res) {
+  Board.findById(req.params.id, (err, board) => {
+    if(err) return res.status(500).json({ error: err });
+    if(!board) return res.status(404).json({ error: 'Not found' });
+
+    const pin = board.pins.create(req.body);
+    board.pins.push(pin);
+    board.save((err) => {
+      if(err) return res.status(400).json({ error: err });
+      res.json(pin);
+    });
+  });
+}
+
+function pinShow(req, res) {
+  Board.findById(req.params.id, (err, board) => {
+    if(err) return res.status(500).json({ error: err });
+    if(!board) return res.status(404).json({ error: 'Not found' });
+
+    const pin = board.pins.id(req.params.pinId);
+    if(!pin) return res.status(404).json({ error: 'Not found' });
+    res.json(pin);
+  });
+}
+
+function pinUpdate(req, res) {
+  Board.findById(req.params.id, (err, board) => {
+    if(err) return res.status(500).json({ error: err });
+    if(!board) return res.status(404).json({ error: 'Not found' });
+
+    const pin = board.pins.id(req.params.pinId);
+    if(!pin) return res.status(404).json({ error: 'Not found' });
+
+    for(const key in req.body) {
+      pin[key] = req.body[key];
+    }
+
+    board.save((err) => {
+      if(err) return res.status(400).json({ error: err });
+      res.json(pin);
+    });
+  });
+}
+
+function pinDelete(req, res) {
+  Board.findById(req.params.id, (err, board) => {
+    if(err) return res.status(500).json({ error: err });
+    if(!board) return res.status(404).json({ error: 'Not found' });
+
+    const pin = board.pins.id(req.params.pinId);
+    if(!pin) return res.status(404).json({ error: 'Not found' });
+
+    pin.remove();
+
+    board.save((err) => {
+      if(err) return res.status(400).json({ error: err });
+      res.status(204).send();
+    });
+  });
+}
+
 module.exports = {
   index: boardsIndex,
   create: boardsCreate,
   show: boardsShow,
   update: boardsUpdate,
-  delete: boardsDelete
+  delete: boardsDelete,
+  pinIndex,
+  pinCreate,
+  pinShow,
+  pinUpdate,
+  pinDelete
 };

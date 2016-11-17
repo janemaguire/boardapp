@@ -1,17 +1,7 @@
 <section>
   <h1>{{ boardsShow.board.title }}</h1>
 
-  <ul>
-    <!-- <li ng-repeat="pin in boardsShow.board.pins" ng-click="boardsShow.showPin()"> -->
-    <li ng-repeat="pin in boardsShow.board.pins">
-      <img ng-src="{{ pin.link }}" ui-sref="pinsShow({ id: pin._id })">
-      <!-- <button type="button" name="delete">Delete</button>
-      <button type="button" name="edit">Edit</button> -->
-    </li>
-  </ul>
-
-  <button ng-click="boardsShow.showForm()">Add Pin</button>
-
+  <!-- ADD PIN FORM -->
   <section class="pin-form" ng-if="boardsShow.formVisible">
     <form ng-submit="boardsShow.createPin()">
       <div class="twelve columns">
@@ -21,9 +11,29 @@
         <input type="text" name="link" placeholder="Link" ng-model="boardsShow.pin.link" class="u-full-width">
       </div>
       <button>Create</button>
-      <button type="button" ng-click="boardsShow.hideForm()">Cancel</button>
+      <button type="button" ng-click="boardsShow.hideCreateForm()">Cancel</button>
     </form>
   </section>
+  <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
+
+  <!-- EDIT PIN FORM -->
+  <section class="pin-form" ng-if="boardsShow.formEditVisible">
+    <h1> SUCCESS! </h1>
+    <li><img ng-src="{{ boardsShow.currentPin.link }}"></li>
+      <input type="text" ng-value="{{ boardsShow.currentPin.title }}" name="title" placeholder="Title" ng-model="boardsShow.pin.title" class="u-full-width">
+      <input type="text" ng-value="{{ boardsShow.currentPin.type }}" name="type" placeholder="Type" ng-model="boardsShow.pin.type" class="u-full-width">
+      <input type="text" ng-value="{{ boardsShow.currentPin.link }}" name="link" placeholder="Link" ng-model="boardsShow.pin.link" class="u-full-width">
+    <button>Update</button>
+    <button type="button" ng-click="boardsShow.hideEditForm()">Hide</button>
+  </section>
+
+  <!-- IMAGES REPEAT -->
+  <ul>
+    <li ng-repeat="pin in boardsShow.board.pins">
+      <img ng-src="{{ pin.link }}" ng-click="boardsShow.showPin(pin)">
+      <!-- {{ pin._id }} -->
+    </li>
+  </ul>
 
   <section class="pin-show">
 
