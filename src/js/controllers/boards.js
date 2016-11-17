@@ -26,10 +26,10 @@ function BoardsNewController(Board, $state) {
   boardsNew.create = create;
 }
 
-BoardsShowController.$inject = ['Board', '$state'];
-function BoardsShowController(Board, $state) {
+BoardsShowController.$inject = ['Board', 'Pin', '$state'];
+function BoardsShowController(Board, Pin, $state) {
   const boardsShow = this;
-
+  boardsShow.formVisible = false;
   boardsShow.board = Board.get($state.params);
 
   function deleteBoard() {
@@ -39,6 +39,30 @@ function BoardsShowController(Board, $state) {
   }
 
   boardsShow.delete = deleteBoard;
+
+  boardsShow.newPin = {};
+
+  function showForm() {
+    boardsShow.formVisible = true;
+  }
+
+  function hideForm() {
+    boardsShow.formVisible = false;
+    boardsShow.newPin = {};
+  }
+
+  boardsShow.showForm = showForm;
+  boardsShow.hideForm = hideForm;
+
+  function createPin() {
+    boardsShow.pin.boardId = $state.params.id;
+    Pin.save(boardsShow.pin, () => {
+      hideForm();
+      boardsShow.board = Board.get($state.params);
+    });
+  }
+
+  boardsShow.createPin = createPin;
 }
 
 BoardsEditController.$inject = ['Board', '$state'];
