@@ -40,6 +40,8 @@ function BoardsShowController(Board, Pin, $state) {
 
   boardsShow.delete = deleteBoard;
 
+
+  //PIN CONTROLLER
   boardsShow.newPin = {};
 
   function showForm() {
@@ -59,10 +61,16 @@ function BoardsShowController(Board, Pin, $state) {
     Pin.save(boardsShow.pin, () => {
       hideForm();
       boardsShow.board = Board.get($state.params);
+      console.log(boardsShow.pin);
     });
   }
 
+  function showPin() {
+    console.log('clicked!');
+  }
+
   boardsShow.createPin = createPin;
+  boardsShow.showPin = showPin;
 }
 
 BoardsEditController.$inject = ['Board', '$state'];
