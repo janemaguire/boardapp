@@ -23,6 +23,7 @@ function LoginController($auth, $state) {
   const login = this;
 
   login.credentials = {};
+
   function submit() {
     $auth.login(login.credentials)
       .then(() => {
@@ -30,6 +31,15 @@ function LoginController($auth, $state) {
       });
   }
 
+  function authenticate(service) {
+    $auth.authenticate(service)
+    .then(() => {
+      $state.go('test');
+      console.log('Is this running');
+    });
+  }
+
   login.submit = submit;
+  login.authenticate = authenticate;
 
 }
