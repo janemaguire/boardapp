@@ -8,7 +8,6 @@ function boardsIndex(req, res) {
 }
 
 function boardsCreate(req, res) {
-
   req.body.user = req.user;
 
   Board.create(req.body, (err, board) => {
