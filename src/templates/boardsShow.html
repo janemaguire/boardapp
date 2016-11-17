@@ -2,7 +2,12 @@
   <h1>{{ boardsShow.board.title }}</h1>
 
   <ul>
-    <li ng-repeat="pin in boardsShow.board.pins"><img ng-src="{{ pin.link }}"></li>
+    <!-- <li ng-repeat="pin in boardsShow.board.pins" ng-click="boardsShow.showPin()"> -->
+    <li ng-repeat="pin in boardsShow.board.pins">
+      <img ng-src="{{ pin.link }}" ui-sref="pinsShow({ id: pin._id })">
+      <!-- <button type="button" name="delete">Delete</button>
+      <button type="button" name="edit">Edit</button> -->
+    </li>
   </ul>
 
   <button ng-click="boardsShow.showForm()">Add Pin</button>
@@ -19,4 +24,9 @@
       <button type="button" ng-click="boardsShow.hideForm()">Cancel</button>
     </form>
   </section>
+
+  <section class="pin-show">
+
+  </section>
+
 </section>
