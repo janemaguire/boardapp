@@ -6,26 +6,6 @@ angular
 Router.$inject = ['$stateProvider', '$urlRouterProvider'];
 function Router($stateProvider, $urlRouterProvider) {
   $stateProvider
-    // .state('usersIndex', {
-    //   url: '/users',
-    //   templateUrl: '/templates/usersIndex.html',
-    //   controller: 'UsersIndexController as usersIndex'
-    // })
-    // .state('usersNew', {
-    //   url: '/users/new',
-    //   templateUrl: '/templates/usersNew.html',
-    //   controller: 'UsersNewController as usersNew'
-    // })
-    // .state('usersShow', {
-    //   url: '/users/:id',
-    //   templateUrl: '/templates/usersShow.html',
-    //   controller: 'UsersShowController as usersShow'
-    // })
-    // .state('usersEdit', {
-    //   url: '/users/:id/edit',
-    //   templateUrl: '/templates/usersEdit.html',
-    //   controller: 'UsersEditController as usersEdit'
-    // })
     .state('register', {
       url: '/register',
       templateUrl: '/templates/register.html',
@@ -39,8 +19,8 @@ function Router($stateProvider, $urlRouterProvider) {
     .state('test', {
       url: '/test',
       templateUrl: '/templates/test.html'
-    })
-  $urlRouterProvider.otherwise('/users');
+    });
+  $urlRouterProvider.otherwise('/');
 }
 
 Auth.$inject = ['$authProvider'];
