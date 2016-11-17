@@ -1,9 +1,9 @@
 <section>
   <h1>{{ boardsShow.board.title }}</h1>
 
-  <ul>
+  <ul class="board">
     <!-- <li ng-repeat="pin in boardsShow.board.pins" ng-click="boardsShow.showPin()"> -->
-    <li ng-repeat="pin in boardsShow.board.pins">
+    <li class="pin" ng-repeat="pin in boardsShow.board.pins">
       <img ng-src="{{ pin.link }}" ui-sref="pinsShow({ id: pin._id })">
       <!-- <button type="button" name="delete">Delete</button>
       <button type="button" name="edit">Edit</button> -->

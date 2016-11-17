@@ -40,7 +40,6 @@ function BoardsShowController(Board, Pin, $state) {
 
   boardsShow.delete = deleteBoard;
 
-
   //PIN CONTROLLER
   boardsShow.newPin = {};
 
