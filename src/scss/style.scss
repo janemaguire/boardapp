@@ -4,11 +4,12 @@
 @import'base/base';
 
 body {
-  background-color: skyblue;
+  background-color: blue;
 }
 
 img {
   max-width: 100%;
+
 }
 
 main {
@@ -20,4 +21,9 @@ main {
     @include span-columns(3);
     @include omega(4n);
   }
+}
+
+button {
+  margin-top: 5px;
+  border-radius: 10px;
 }
