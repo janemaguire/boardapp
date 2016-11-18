@@ -2,7 +2,8 @@ angular.module('boardApp')
   .controller('BoardsIndexController', BoardsIndexController)
   .controller('BoardsNewController', BoardsNewController)
   .controller('BoardsShowController', BoardsShowController)
-  .controller('BoardsEditController', BoardsEditController);
+  .controller('BoardsEditController', BoardsEditController)
+  .controller('UserBoardsController', UserBoardsController);
 
 BoardsIndexController.$inject = ['Board'];
 function BoardsIndexController(Board){
@@ -24,6 +25,14 @@ function BoardsNewController(Board, $state) {
   }
 
   boardsNew.create = create;
+}
+
+UserBoardsController.$inject = ['Board', '$auth'];
+function UserBoardsController(Board, $auth) {
+  const userBoards = this;
+
+  const payload = $auth.getPayload();
+  userBoards.all = Board.query({ user: payload._id });
 }
 
 BoardsShowController.$inject = ['Board', 'Pin', '$state'];

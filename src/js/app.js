@@ -31,6 +31,11 @@ function Router($stateProvider, $urlRouterProvider) {
      templateUrl: '/templates/boardsNew.html',
      controller: 'BoardsNewController as boardsNew'
    })
+   .state('userBoards', {
+     url: '/boards/me',
+     templateUrl: '/templates/userBoards.html',
+     controller: 'UserBoardsController as userBoards'
+   })
    .state('boardsShow', {
      url: '/boards/:id',
      templateUrl: '/templates/boardsShow.html',
@@ -50,11 +55,6 @@ function Router($stateProvider, $urlRouterProvider) {
      url: '/pins/:id',
      templateUrl: '/templates/pinsShow.html',
      controller: 'PinsShowController as pinsShow'
-   })
-   .state('userBoards', {
-     url: '/user/:id',
-     templateUrl: '/templates/userBoards.html',
-     controller: 'BoardsShowController as boardsShow'
    });
 
   $urlRouterProvider.otherwise('/');

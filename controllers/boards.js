@@ -1,10 +1,12 @@
 const Board = require('../models/board');
 
 function boardsIndex(req, res) {
-  Board.find((err, boards) => {
-    if(err) return res.status(500).json({ error: err});
-    return res.json(boards);
-  });
+  Board.find(req.query)
+    .populate('user')
+    .exec((err, boards) => {
+      if(err) return res.status(500).json({ error: err});
+      return res.json(boards);
+    });
 }
 
 function boardsCreate(req, res) {
@@ -17,12 +19,14 @@ function boardsCreate(req, res) {
 }
 
 function boardsShow(req, res) {
-  Board.findById(req.params.id, (err, board) => {
-    if(err) return res.status(500).json({ error: err });
-    if(!board) return res.status(404).json({ error: 'Not found' });
+  Board.findById(req.params.id)
+    .populate('user')
+    .exec((err, board) => {
+      if(err) return res.status(500).json({ error: err });
+      if(!board) return res.status(404).json({ error: 'Not found' });
 
-    return res.json(board);
-  });
+      return res.json(board);
+    });
 }
 
 function boardsUpdate(req, res) {

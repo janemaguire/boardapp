@@ -3,6 +3,7 @@
     <li ng-repeat="board in boardsIndex.all">
       <a ui-sref="boardsShow({ id: board._id })">
         <h2>{{ board.title }}</h2>
+        <h2>{{ board.user.username }}</h2>
       </a>
     </li>
   </ul>
