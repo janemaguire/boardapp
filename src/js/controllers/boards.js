@@ -5,6 +5,7 @@ angular.module('boardApp')
   .controller('BoardsEditController', BoardsEditController)
   .controller('UserBoardsController', UserBoardsController);
 
+//SHOW ALL BOARDS
 BoardsIndexController.$inject = ['Board'];
 function BoardsIndexController(Board){
   const boardsIndex = this;
@@ -12,29 +13,46 @@ function BoardsIndexController(Board){
   boardsIndex.all = Board.query();
 }
 
+//CREATE NEW BOARD
 BoardsNewController.$inject = ['Board', '$state'];
 function BoardsNewController(Board, $state) {
   const boardsNew = this;
-
   boardsNew.board = {};
-
   function create() {
     Board.save(boardsNew.board, (board) => {
       $state.go('boardsShow', { id: board._id });
     });
   }
-
   boardsNew.create = create;
 }
 
-UserBoardsController.$inject = ['Board', '$auth'];
-function UserBoardsController(Board, $auth) {
+//SHOW BOARDS BY USER
+UserBoardsController.$inject = ['Board', '$auth', '$state'];
+function UserBoardsController(Board, $auth, $state) {
   const userBoards = this;
 
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
+
+  //DELETE BOARD
+  function deleteBoard(board) {
+    console.log('clicked!', board);
+    board.$remove(() => {
+      $state.reload();
+    });
+  }
+
+  // EDIT BOARD
+  function editBoard(board) {
+    console.log('editBoard:', board);
+  }
+
+  userBoards.delete = deleteBoard;
+  userBoards.edit = editBoard;
+
 }
 
+//SHOW BOARDS CONTROLLER
 BoardsShowController.$inject = ['Board', 'Pin', '$state'];
 function BoardsShowController(Board, Pin, $state) {
   const boardsShow = this;
@@ -42,15 +60,16 @@ function BoardsShowController(Board, Pin, $state) {
   boardsShow.formEditVisible = false;
   boardsShow.board = Board.get($state.params);
 
-  function deleteBoard() {
-    boardsShow.board.$remove(() => {
-      $state.go('boardsIndex');
-    });
-  }
+  // //DELETE BOARD
+  // function deleteBoard() {
+  //   boardsShow.board.$remove(() => {
+  //     $state.go('boardsIndex');
+  //   });
+  // }
+  //
+  // boardsShow.delete = deleteBoard;
 
-  boardsShow.delete = deleteBoard;
-
-  //PIN CONTROLLER
+  //ADD PIN CONTROLLER
   boardsShow.newPin = {};
 
   function showCreateForm() {
@@ -65,6 +84,7 @@ function BoardsShowController(Board, Pin, $state) {
   boardsShow.showCreateForm = showCreateForm;
   boardsShow.hideCreateForm = hideCreateForm;
 
+  //CREATE PIN
   function createPin() {
     Pin.save({ boardId: $state.params.id }, boardsShow.newPin, () => {
       boardsShow.pin = {};
@@ -73,9 +93,8 @@ function BoardsShowController(Board, Pin, $state) {
     });
   }
 
+  //EDIT PIN CONTROLLER
   function showEditForm(pin) {
-    // console.log('TRUE!');
-    // console.log('this: ',boardsShow.board.pins);
     boardsShow.formEditVisible = true;
     boardsShow.currentPin = pin;
   }
@@ -110,6 +129,7 @@ function BoardsShowController(Board, Pin, $state) {
   boardsShow.createPin = createPin;
   boardsShow.showPin = showPin;
 
+  //UPDATE BOARD CONTROLLER WITH EDIT PIN
   function updateBoard(updatedPin) {
     Pin.update({ id: updatedPin._id, boardId: $state.params.id }, updatedPin);
   }
@@ -117,6 +137,7 @@ function BoardsShowController(Board, Pin, $state) {
 
 }
 
+//EDIT BOARD
 BoardsEditController.$inject = ['Board', '$state'];
 function BoardsEditController(Board, $state) {
   const boardsEdit = this;
@@ -124,7 +145,6 @@ function BoardsEditController(Board, $state) {
   boardsEdit.board = Board.get($state.params);
 
   function updateBoard() {
-    console.log('Running?');
     boardsEdit.board.$update(() => {
       $state.go('boardsShow', $state.params);
     });

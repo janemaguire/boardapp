@@ -15,7 +15,6 @@
     </form>
   </section>
   <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
-  {{ boardsShow.currentPin }}
 
   <!-- EDIT PIN FORM -->
   <section class="pin-form" ng-if="boardsShow.formEditVisible">
@@ -33,7 +32,6 @@
   <ul>
     <li ng-repeat="pin in boardsShow.board.pins">
       <img ng-src="{{ pin.link }}" ng-click="boardsShow.showPin(pin)">
-      <!-- {{ pin._id }} -->
     </li>
   </ul>
   <section class="pin-show">

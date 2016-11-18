@@ -5,6 +5,8 @@
         <h1> {{ board.title }} </h1>
         <h2>{{ board.user.username }}</h2>
       </a>
+      <button>Edit</button>
+      <button ng-click="userBoards.delete(board)">Delete</button>
     </li>
   </ul>
 </section>
