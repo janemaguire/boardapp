@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-// body {
-//   background: $body-background-color;
-// }
-=======
 @import'partials/normalize';
 @import'bourbon/bourbon';
 @import'neat/neat';
@@ -26,4 +21,3 @@ main {
     @include omega(4n);
   }
 }
->>>>>>> 64999250b53235adf327dcc4caeac641c6c8efc7
