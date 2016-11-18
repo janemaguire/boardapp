@@ -41,15 +41,7 @@ function UserBoardsController(Board, $auth, $state) {
       $state.reload();
     });
   }
-
-  // EDIT BOARD
-  function editBoard(board) {
-    console.log('editBoard:', board);
-  }
-
   userBoards.delete = deleteBoard;
-  userBoards.edit = editBoard;
-
 }
 
 //SHOW BOARDS CONTROLLER
@@ -59,15 +51,6 @@ function BoardsShowController(Board, Pin, $state) {
   boardsShow.formVisible = false;
   boardsShow.formEditVisible = false;
   boardsShow.board = Board.get($state.params);
-
-  // //DELETE BOARD
-  // function deleteBoard() {
-  //   boardsShow.board.$remove(() => {
-  //     $state.go('boardsIndex');
-  //   });
-  // }
-  //
-  // boardsShow.delete = deleteBoard;
 
   //ADD PIN CONTROLLER
   boardsShow.newPin = {};
