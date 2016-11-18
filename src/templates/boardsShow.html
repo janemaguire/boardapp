@@ -7,23 +7,23 @@
     <form ng-submit="boardsShow.createPin()">
       <div class="twelve columns">
         <label>Title</label>
-        <input type="text" name="title" placeholder="Title" ng-model="boardsShow.pin.title" class="u-full-width">
-        <input type="text" name="type" placeholder="Type" ng-model="boardsShow.pin.type" class="u-full-width">
-        <input type="text" name="link" placeholder="Link" ng-model="boardsShow.pin.link" class="u-full-width">
+        <input type="text" name="title" placeholder="Title" ng-model="boardsShow.newPin.title" class="u-full-width">
+        <input type="text" name="type" placeholder="Type" ng-model="boardsShow.newPin.type" class="u-full-width">
+        <input type="text" name="link" placeholder="Link" ng-model="boardsShow.newPin.link" class="u-full-width">
       </div>
       <button>Create</button>
       <button type="button" ng-click="boardsShow.hideCreateForm()">Cancel</button>
     </form>
   </section>
   <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
-
+  {{ boardsShow.currentPin }}
   <!-- EDIT PIN FORM -->
   <section class="pin-form" ng-if="boardsShow.formEditVisible">
     <h1> SUCCESS! </h1>
     <li><img ng-src="{{ boardsShow.currentPin.link }}"></li>
-      <input type="text" ng-value="{{ boardsShow.currentPin.title }}" name="title" placeholder="Title" ng-model="boardsShow.pin.title" class="u-full-width">
-      <input type="text" ng-value="{{ boardsShow.currentPin.type }}" name="type" placeholder="Type" ng-model="boardsShow.pin.type" class="u-full-width">
-      <input type="text" ng-value="{{ boardsShow.currentPin.link }}" name="link" placeholder="Link" ng-model="boardsShow.pin.link" class="u-full-width">
+      <input type="text" name="title" placeholder="Title" ng-model="boardsShow.currentPin.title" class="u-full-width">
+      <input type="text" name="type" placeholder="Type" ng-model="boardsShow.currentPin.type" class="u-full-width">
+      <input type="text" name="link" placeholder="Link" ng-model="boardsShow.currentPin.link" class="u-full-width">
     <button>Update</button>
     <button type="button" ng-click="boardsShow.hideEditForm()">Hide</button>
   </section>

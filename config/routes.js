@@ -28,6 +28,7 @@ router.route('/boards/:id/pins')
 router.route('/boards/:id/pins/:pinId')
   .get(boardsController.pinShow)
   .put(boardsController.pinUpdate)
+  .post(boardsController.pinCreate)
   .delete(boardsController.pinDelete);
 
 //USER ROUTES
