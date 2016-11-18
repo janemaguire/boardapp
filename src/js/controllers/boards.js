@@ -66,11 +66,10 @@ function BoardsShowController(Board, Pin, $state) {
   boardsShow.hideCreateForm = hideCreateForm;
 
   function createPin() {
-    boardsShow.pin.boardId = $state.params.id;
-    Pin.save(boardsShow.pin, () => {
+    Pin.save({ boardId: $state.params.id }, boardsShow.newPin, () => {
+      boardsShow.pin = {};
       hideCreateForm();
       boardsShow.board = Board.get($state.params);
-      console.log(boardsShow.pin);
     });
   }
 
@@ -85,17 +84,37 @@ function BoardsShowController(Board, Pin, $state) {
     boardsShow.formEditVisible = false;
   }
 
+  PinsEditController.$inject = ['Pin', '$state'];
+  function PinsEditController(Pin, $state) {
+    const pinsEdit = this;
+
+    pinsEdit.pin = Pin.get($state.params);
+
+    function updatePin() {
+      Pin.save({ boardId: $state.params.id }, boardsShow.currentPin, () => {
+        $state.go('pinsShow', $state.params);
+      });
+    }
+    pinsEdit.updatePin = updatePin;
+    hideEditForm();
+  }
+
   function showPin(pin) {
     console.log('clicked!', pin);
 
     showEditForm(pin);
   }
 
-
   boardsShow.showEditForm = showEditForm;
   boardsShow.hideEditForm = hideEditForm;
   boardsShow.createPin = createPin;
   boardsShow.showPin = showPin;
+
+  function updateBoard(updatedPin) {
+    Pin.update({ id: updatedPin._id, boardId: $state.params.id }, updatedPin);
+  }
+  boardsShow.updateBoard = updateBoard;
+
 }
 
 BoardsEditController.$inject = ['Board', '$state'];
@@ -105,9 +124,10 @@ function BoardsEditController(Board, $state) {
   boardsEdit.board = Board.get($state.params);
 
   function updateBoard() {
+    console.log('Running?');
     boardsEdit.board.$update(() => {
       $state.go('boardsShow', $state.params);
     });
   }
-  boardsEdit.update = updateBoard;
+  boardsEdit.updateBoard = updateBoard;
 }
