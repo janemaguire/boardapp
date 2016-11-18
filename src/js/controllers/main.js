@@ -1,9 +1,11 @@
 angular.module('boardApp')
   .controller('MainController', MainController);
-MainController.$inject = ['$auth', '$state', '$rootScope'];
-function MainController($auth, $state, $rootScope) {
+
+MainController.$inject = ['$auth', '$state'];
+function MainController($auth, $state) {
   const main = this;
   main.isLoggedIn = $auth.isAuthenticated;
+
   function logout() {
     $auth.logout()
       .then(() => {

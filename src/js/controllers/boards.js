@@ -2,8 +2,10 @@ angular.module('boardApp')
   .controller('BoardsIndexController', BoardsIndexController)
   .controller('BoardsNewController', BoardsNewController)
   .controller('BoardsShowController', BoardsShowController)
-  .controller('BoardsEditController', BoardsEditController);
+  .controller('BoardsEditController', BoardsEditController)
+  .controller('UserBoardsController', UserBoardsController);
 
+//SHOW ALL BOARDS
 BoardsIndexController.$inject = ['Board'];
 function BoardsIndexController(Board){
   const boardsIndex = this;
@@ -11,21 +13,38 @@ function BoardsIndexController(Board){
   boardsIndex.all = Board.query();
 }
 
+//CREATE NEW BOARD
 BoardsNewController.$inject = ['Board', '$state'];
 function BoardsNewController(Board, $state) {
   const boardsNew = this;
-
   boardsNew.board = {};
-
   function create() {
     Board.save(boardsNew.board, (board) => {
       $state.go('boardsShow', { id: board._id });
     });
   }
-
   boardsNew.create = create;
 }
 
+//SHOW BOARDS BY USER
+UserBoardsController.$inject = ['Board', '$auth', '$state'];
+function UserBoardsController(Board, $auth, $state) {
+  const userBoards = this;
+
+  const payload = $auth.getPayload();
+  userBoards.all = Board.query({ user: payload._id });
+
+  //DELETE BOARD
+  function deleteBoard(board) {
+    console.log('clicked!', board);
+    board.$remove(() => {
+      $state.reload();
+    });
+  }
+  userBoards.delete = deleteBoard;
+}
+
+//SHOW BOARDS CONTROLLER
 BoardsShowController.$inject = ['Board', 'Pin', '$state'];
 function BoardsShowController(Board, Pin, $state) {
   const boardsShow = this;
@@ -33,15 +52,7 @@ function BoardsShowController(Board, Pin, $state) {
   boardsShow.formEditVisible = false;
   boardsShow.board = Board.get($state.params);
 
-  function deleteBoard() {
-    boardsShow.board.$remove(() => {
-      $state.go('boardsIndex');
-    });
-  }
-
-  boardsShow.delete = deleteBoard;
-
-  //PIN CONTROLLER
+  //ADD PIN CONTROLLER
   boardsShow.newPin = {};
 
   function showCreateForm() {
@@ -56,18 +67,17 @@ function BoardsShowController(Board, Pin, $state) {
   boardsShow.showCreateForm = showCreateForm;
   boardsShow.hideCreateForm = hideCreateForm;
 
+  //CREATE PIN
   function createPin() {
-    boardsShow.pin.boardId = $state.params.id;
-    Pin.save(boardsShow.pin, () => {
+    Pin.save({ boardId: $state.params.id }, boardsShow.newPin, () => {
+      boardsShow.pin = {};
       hideCreateForm();
       boardsShow.board = Board.get($state.params);
-      console.log(boardsShow.pin);
     });
   }
 
+  //EDIT PIN CONTROLLER
   function showEditForm(pin) {
-    // console.log('TRUE!');
-    // console.log('this: ',boardsShow.board.pins);
     boardsShow.formEditVisible = true;
     boardsShow.currentPin = pin;
   }
@@ -76,19 +86,41 @@ function BoardsShowController(Board, Pin, $state) {
     boardsShow.formEditVisible = false;
   }
 
+  PinsEditController.$inject = ['Pin', '$state'];
+  function PinsEditController(Pin, $state) {
+    const pinsEdit = this;
+
+    pinsEdit.pin = Pin.get($state.params);
+
+    function updatePin() {
+      Pin.save({ boardId: $state.params.id }, boardsShow.currentPin, () => {
+        $state.go('pinsShow', $state.params);
+      });
+    }
+    pinsEdit.updatePin = updatePin;
+    hideEditForm();
+  }
+
   function showPin(pin) {
     console.log('clicked!', pin);
 
     showEditForm(pin);
   }
 
-
   boardsShow.showEditForm = showEditForm;
   boardsShow.hideEditForm = hideEditForm;
   boardsShow.createPin = createPin;
   boardsShow.showPin = showPin;
+
+  //UPDATE BOARD CONTROLLER WITH EDIT PIN
+  function updateBoard(updatedPin) {
+    Pin.update({ id: updatedPin._id, boardId: $state.params.id }, updatedPin);
+  }
+  boardsShow.updateBoard = updateBoard;
+
 }
 
+//EDIT BOARD
 BoardsEditController.$inject = ['Board', '$state'];
 function BoardsEditController(Board, $state) {
   const boardsEdit = this;
@@ -100,5 +132,5 @@ function BoardsEditController(Board, $state) {
       $state.go('boardsShow', $state.params);
     });
   }
-  boardsEdit.update = updateBoard;
+  boardsEdit.updateBoard = updateBoard;
 }
