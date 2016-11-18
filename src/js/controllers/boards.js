@@ -30,6 +30,7 @@ function BoardsNewController(Board, $state) {
 UserBoardsController.$inject = ['Board', '$auth', '$state'];
 function UserBoardsController(Board, $auth, $state) {
   const userBoards = this;
+  userBoards.formEditVisible = false;
 
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
@@ -42,6 +43,25 @@ function UserBoardsController(Board, $auth, $state) {
     });
   }
   userBoards.delete = deleteBoard;
+
+  function showEditForm(board) {
+    userBoards.formEditVisible = true;
+    userBoards.board = board;
+  }
+
+  function hideEditForm() {
+    userBoards.formEditVisible = false;
+  }
+
+  userBoards.showEditForm = showEditForm;
+  userBoards.hideEditForm = hideEditForm;
+
+  function updateBoard() {
+    userBoards.board.$update(() => {
+      $state.reload();
+    });
+  }
+  userBoards.updateBoard = updateBoard;
 }
 
 //SHOW BOARDS CONTROLLER
