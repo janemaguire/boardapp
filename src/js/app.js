@@ -46,11 +46,6 @@ function Router($stateProvider, $urlRouterProvider) {
      templateUrl: '/templates/boardsEdit.html',
      controller: 'BoardsEditController as boardsEdit'
    })
-   .state('pinsNew', {
-     url: '/pins/new',
-     templateUrl: '/templates/pinsNew.html',
-     controller: 'PinsNewController as pinsNew'
-   })
    .state('pinsShow', {
      url: '/pins/:id',
      templateUrl: '/templates/pinsShow.html',
