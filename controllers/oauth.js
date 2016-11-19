@@ -78,7 +78,7 @@ function instagram(req, res) {
       client_secret: '515f0e2240324d309702de5f892ec085',
       redirect_uri: req.body.redirectUri,
       grant_type: 'authorization_code'
-    }
+    };
 
     // Request user's profile with accessToken
     return request.post({
@@ -118,10 +118,8 @@ function instagram(req, res) {
         });
       });
     });
-
   });
 }
-
 
 module.exports = {
   facebook,

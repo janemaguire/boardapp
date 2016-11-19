@@ -17,9 +17,9 @@ function Router($stateProvider, $urlRouterProvider) {
      templateUrl: '/templates/login.html',
      controller: 'LoginController as login'
    })
-   .state('test', {
-     url: '/test',
-     templateUrl: '/templates/test.html'
+   .state('menu', {
+     url: '/menu',
+     templateUrl: '/templates/menu.html'
    })
    .state('boardsIndex', {
      url: '/boards',
@@ -31,6 +31,11 @@ function Router($stateProvider, $urlRouterProvider) {
      templateUrl: '/templates/boardsNew.html',
      controller: 'BoardsNewController as boardsNew'
    })
+   .state('userBoards', {
+     url: '/boards/me',
+     templateUrl: '/templates/userBoards.html',
+     controller: 'UserBoardsController as userBoards'
+   })
    .state('boardsShow', {
      url: '/boards/:id',
      templateUrl: '/templates/boardsShow.html',
@@ -41,20 +46,10 @@ function Router($stateProvider, $urlRouterProvider) {
      templateUrl: '/templates/boardsEdit.html',
      controller: 'BoardsEditController as boardsEdit'
    })
-   .state('pinsNew', {
-     url: '/pins/new',
-     templateUrl: '/templates/pinsNew.html',
-     controller: 'PinsNewController as pinsNew'
-   })
    .state('pinsShow', {
      url: '/pins/:id',
      templateUrl: '/templates/pinsShow.html',
      controller: 'PinsShowController as pinsShow'
-   })
-   .state('userBoards', {
-     url: '/user/:id',
-     templateUrl: '/templates/userBoards.html',
-     controller: 'BoardsShowController as boardsShow'
    });
 
   $urlRouterProvider.otherwise('/');

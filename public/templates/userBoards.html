@@ -1,9 +1,22 @@
 <section>
   <ul>
-    <li ng-repeat="board in boardsIndex.all">
+    <li ng-repeat="board in userBoards.all">
       <a ui-sref="boardsShow({ id: board._id })">
-        <h2>{{ board.title }}</h2>
+        <h1> {{ board.title }} </h1>
+        <h2>{{ board.user.username }}</h2>
       </a>
+      <button ng-click="userBoards.showEditForm(board)">Edit</button>
+      <button ng-click="userBoards.delete(board)">Delete</button>
     </li>
   </ul>
+
+  <!-- EDIT BOARD FORM -->
+  <section class="board-form" ng-if="userBoards.formEditVisible">
+    <form ng-submit="userBoards.updateBoard()">
+      <input type="text" name="title" placeholder="Title" ng-model="userBoards.board.title" class="u-full-width">
+      <button>Update</button>
+      <button type="button" ng-click="userBoards.hideEditForm()">Hide</button>
+    </form>
+  </section>
+
 </section>

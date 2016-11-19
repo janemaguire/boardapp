@@ -1,6 +1,5 @@
 angular.module('boardApp')
   // .controller('PinsIndexController', PinsIndexController)
-  .controller('PinsNewController', PinsNewController)
   .controller('PinsShowController', PinsShowController)
   .controller('PinsEditController', PinsEditController);
 
@@ -10,21 +9,6 @@ angular.module('boardApp')
 //
 //   pinsIndex.all = Pin.query();
 // }
-
-PinsNewController.$inject = ['Pin', '$state'];
-function PinsNewController(Pin, $state) {
-  const pinsNew = this;
-
-  pinsNew.pin = {};
-
-  function create() {
-    Pin.save(pinsNew.pin, (pin) => {
-      $state.go('pinsShow', { id: pin._id });
-    });
-  }
-
-  pinsNew.create = create;
-}
 
 PinsShowController.$inject = ['Pin', '$state'];
 function PinsShowController(Pin, $state) {
