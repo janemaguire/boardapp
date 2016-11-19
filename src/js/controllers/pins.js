@@ -25,6 +25,22 @@ function PinsShowController(Pin, $state) {
   pinsShow.delete = deletePin;
 }
 
+// PinsEditController.$inject = ['Pin', '$state'];
+// function PinsEditController(Pin, $state) {
+//   const pinsEdit = this;
+//
+//   pinsEdit.pin = Pin.get($state.params);
+//
+//   function updatePin() {
+//     Pin.save({ boardId: $state.params.id }, boardsShow.currentPin, () => {
+//       $state.go('pinsShow', $state.params);
+//     });
+//   }
+//
+//   pinsEdit.updatePin = updatePin;
+//   hideEditForm();
+// }
+
 PinsEditController.$inject = ['Pin', '$state'];
 function PinsEditController(Pin, $state) {
   const pinsEdit = this;

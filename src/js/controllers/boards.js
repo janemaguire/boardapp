@@ -88,6 +88,8 @@ function BoardsShowController(Board, Pin, $state, $auth) {
     boardsShow.formCopyVisible = true;
   }
 
+  boardsShow.showCopyForm = showCopyForm;
+
   function copyPinToBoard(board) {
     Pin.save({ boardId: board._id }, boardsShow.copyPin, () => {
       $state.reload();
@@ -100,6 +102,8 @@ function BoardsShowController(Board, Pin, $state, $auth) {
     boardsShow.formCopyVisible = false;
   }
 
+  boardsShow.hideCopyForm = hideCopyForm;
+
   //EDIT PIN CONTROLLER
   function showEditForm(pin) {
     boardsShow.formEditVisible = true;
@@ -110,25 +114,9 @@ function BoardsShowController(Board, Pin, $state, $auth) {
     boardsShow.formEditVisible = false;
   }
 
-  PinsEditController.$inject = ['Pin', '$state'];
-  function PinsEditController(Pin, $state) {
-    const pinsEdit = this;
-
-    pinsEdit.pin = Pin.get($state.params);
-
-    function updatePin() {
-      Pin.save({ boardId: $state.params.id }, boardsShow.currentPin, () => {
-        $state.go('pinsShow', $state.params);
-      });
-    }
-
-    pinsEdit.updatePin = updatePin;
-    hideEditForm();
-  }
-
   function deletePin(pin) {
     console.log('delete me', pin);
-    Pin.remove({ boardId: $state.params.id }, boardsShow.currentPin, () => {
+    Pin.remove({ id: pin._id, boardId: $state.params.id }, () => {
       $state.reload();
       // $state.go('boardsShow', { id: board._id });
     });
