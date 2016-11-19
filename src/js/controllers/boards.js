@@ -30,7 +30,6 @@ function BoardsNewController(Board, $state) {
 UserBoardsController.$inject = ['Board', '$auth', '$state'];
 function UserBoardsController(Board, $auth, $state) {
   const userBoards = this;
-  userBoards.formEditVisible = false;
 
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
@@ -44,25 +43,6 @@ function UserBoardsController(Board, $auth, $state) {
     });
   }
   userBoards.delete = deleteBoard;
-
-  function showEditForm(board) {
-    userBoards.formEditVisible = true;
-    userBoards.board = board;
-  }
-
-  function hideEditForm() {
-    userBoards.formEditVisible = false;
-  }
-
-  userBoards.showEditForm = showEditForm;
-  userBoards.hideEditForm = hideEditForm;
-
-  function updateBoard() {
-    userBoards.board.$update(() => {
-      $state.reload();
-    });
-  }
-  userBoards.updateBoard = updateBoard;
 }
 
 //SHOW BOARDS CONTROLLER
@@ -141,14 +121,24 @@ function BoardsShowController(Board, Pin, $state, $auth) {
         $state.go('pinsShow', $state.params);
       });
     }
+
     pinsEdit.updatePin = updatePin;
     hideEditForm();
   }
 
-  
+  function deletePin(pin) {
+    console.log('delete me', pin);
+    Pin.remove({ boardId: $state.params.id }, boardsShow.currentPin, () => {
+      $state.reload();
+      // $state.go('boardsShow', { id: board._id });
+    });
+  }
+
+  boardsShow.deletePin = deletePin;
 
   function showPin(pin) {
     console.log('clicked!', pin);
+
     showEditForm(pin);
   }
 
@@ -156,8 +146,6 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   boardsShow.hideEditForm = hideEditForm;
   boardsShow.createPin = createPin;
   boardsShow.showPin = showPin;
-  boardsShow.showCopyForm = showCopyForm;
-  boardsShow.hideCopyForm = hideCopyForm;
 
   //UPDATE BOARD CONTROLLER WITH EDIT PIN
   function updateBoard(updatedPin) {
