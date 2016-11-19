@@ -18,7 +18,6 @@ main {
 
 .board {
   li {
-    @include media(min-width 320px max-width 480px, 6) {
     @include outer-container;
       header { @include span-columns(3); }
       section { @include span-columns(9); }
@@ -29,14 +28,3 @@ button {
   margin-top: 5px;
   border-radius: 10px;
 }
-
-// .image-grid {
-//   @include outer-container;
-//     header { @include span-columns(3); }
-//     section { @include span-columns(9); }
-// }
-//
-// .pin-box {
-//   height: 200px;
-//   width: 200px;
-// }

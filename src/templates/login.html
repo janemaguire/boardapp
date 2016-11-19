@@ -1,4 +1,4 @@
-<section>
+<section class="login">
   <form novalidate ng-submit="login.submit()">
     <div class="row">
       <label>Email</label>
@@ -10,6 +10,10 @@
     </div>
     <button>Login</button>
   </form>
-  <button ng-click="login.authenticate('facebook')">Login with Facebook</button>
-  <button ng-click="login.authenticate('instagram')">Login with Instagram</button>
+  <div class="social">
+    <img src="images/facebook.png" alt="Logo image" ng-click="login.authenticate('facebook')">
+  <!-- <button ng-click="login.authenticate('facebook')">Login with Facebook</button> -->
+    <img src="images/instagram.png" alt="Logo image" ng-click="login.authenticate('instagram')">
+  </div>
+  <!-- <button ng-click="login.authenticate('instagram')">Login with Instagram</button> -->
 </section>
