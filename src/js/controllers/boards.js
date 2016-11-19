@@ -101,6 +101,22 @@ function BoardsShowController(Board, Pin, $state) {
     hideEditForm();
   }
 
+  function deletePin(pin) {
+    console.log('delete me', pin);
+    pin.remove(() => {
+      $state.go('pinsShow');
+    });
+  }
+
+  boardsShow.deletePin = deletePin;
+
+  // function deleteFilm() {
+  //   filmsShow.film.$remove(() => {
+  //     $state.go('filmsIndex');
+  //   });
+  // }
+
+
   function showPin(pin) {
     console.log('clicked!', pin);
 

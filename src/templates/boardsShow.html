@@ -23,8 +23,9 @@
       <input type="text" name="title" placeholder="Title" ng-model="boardsShow.currentPin.title" class="u-full-width">
       <input type="text" name="type" placeholder="Type" ng-model="boardsShow.currentPin.type" class="u-full-width">
       <input type="text" name="link" placeholder="Link" ng-model="boardsShow.currentPin.link" class="u-full-width">
-    <button type="button" ng-click="boardsShow.updateBoard(boardsShow.currentPin); boardsShow.hideEditForm()">Update</button>
-    <button type="button" ng-click="boardsShow.hideEditForm()">Hide</button>
+      <button type="button" ng-click="boardsShow.updateBoard(boardsShow.currentPin); boardsShow.hideEditForm()">Update</button>
+      <button type="button" ng-click="boardsShow.hideEditForm()">Hide</button>
+      <button type="button" ng-click="boardsShow.deletePin(boardsShow.currentPin);">Delete Pin</button>
   </form>
   </section>
 
