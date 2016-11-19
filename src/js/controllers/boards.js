@@ -35,6 +35,7 @@ function UserBoardsController(Board, $auth, $state) {
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
   console.log('clicked', userBoards.all);
+
   //DELETE BOARD
   function deleteBoard(board) {
     console.log('clicked!', board);
@@ -106,6 +107,14 @@ function BoardsShowController(Board, Pin, $state, $auth) {
     console.log('clicked', boardsShow.all);
     boardsShow.formCopyVisible = true;
   }
+
+  function copyPinToBoard(board) {
+    Pin.save({ boardId: board._id }, boardsShow.copyPin, () => {
+      $state.reload();
+    });
+  }
+
+  boardsShow.copyPinToBoard = copyPinToBoard;
 
   function hideCopyForm() {
     boardsShow.formCopyVisible = false;
