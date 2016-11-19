@@ -1,10 +1,10 @@
-@import'partials/reset';
+@import'partials/normalize';
 @import'bourbon/bourbon';
 @import'neat/neat';
 @import'base/base';
 
 body {
-  // background-color: blue;
+  background-color: white;
 }
 
 img {
@@ -12,76 +12,18 @@ img {
 
 }
 
-$font-size: Helvetica, sans-serif;
-$primary-color: black;
-$text-align: center;
-
-
-h1 {
-  font: 50px $font-size;
-  color: $primary-color;
-  align: $text-align;
-
-}
-
 main {
   @include outer-container;
-  padding: 0 20px;
-}
-
-header {
-  background-color: lightgray;
-  border-bottom: 1px solid gray;
-  margin-bottom: 30px;
-  nav {
-    height: 50px;
-    @include outer-container;
-    padding: 0 20px;
-    ul{
-      li {
-        line-height: 50px;
-        display: inline-block;
-        float: right;
-        margin-left: 10px;
-        &:nth-child(1) {
-          float: left;
-          margin-left: 0;
-          font-size: 24px;
-          font-weight: bold;
-        }
-      }
-    }
-  }
-}
-
-.login {
-  @include span-columns(6);
-  @include shift(3);
-  .social {
-    text-align: center;
-    img {
-      height: 60px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-  }
-  form {
-    margin-bottom: 30px;
-    button {
-      width: 100%;
-    }
-  }
 }
 
 .board {
   li {
-    @include span-columns(3);
-    @include omega(4n);
+    @include outer-container;
+      header { @include span-columns(3); }
+      section { @include span-columns(9); }
   }
 }
+
 
 @mixin grid-item-columns($columns) {
   width: (100% / 12) * $columns;
@@ -179,3 +121,9 @@ header {
 //     width: 4px;
 //   }
 // }
+=======
+button {
+  margin-top: 5px;
+  border-radius: 10px;
+}
+>>>>>>> development

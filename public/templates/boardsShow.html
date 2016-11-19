@@ -19,6 +19,7 @@
   <!-- EDIT PIN FORM -->
   <section class="pin-form" ng-if="boardsShow.formEditVisible">
     <div class="grid-items-lines"
+    <a href="javascript:void(0)" class="grid-item"></a>
     <li><img ng-src="{{ boardsShow.currentPin.link }}"></li>
     <form>
       <input type="text" name="title" placeholder="Title" ng-model="boardsShow.currentPin.title" class="u-full-width">
@@ -30,12 +31,20 @@
   </form>
   </section>
 
+  <!-- COPY PIN FORM -->
+  <section ng-if="boardsShow.formCopyVisible">
+    <h1>Yo</h1>
+    {{ boardsShow.copyPin }}
+    <button type="button" ng-click="boardsShow.hideCopyForm()">Hide</button>
+  </section>
+
   <!-- IMAGES REPEAT -->
-  <ul>
+  <section>
+  <ul class="board">
     <li ng-repeat="pin in boardsShow.board.pins">
       <img ng-src="{{ pin.link }}" ng-click="boardsShow.showPin(pin)">
+      <button type="button" ng-click="boardsShow.showCopyForm(pin)">Copy</button>
     </li>
   </ul>
-  <section class="pin-show">
   </section>
 </section>

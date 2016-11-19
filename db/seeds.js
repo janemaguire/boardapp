@@ -6,6 +6,7 @@ const User = require('../models/user');
 mongoose.connect(db.uri);
 
 Board.collection.drop();
+User.collection.drop();
 
 User.create({
   username: 'edweirdo',
