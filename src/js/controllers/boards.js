@@ -34,7 +34,7 @@ function UserBoardsController(Board, $auth, $state) {
 
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
-
+  console.log('clicked', userBoards.all);
   //DELETE BOARD
   function deleteBoard(board) {
     console.log('clicked!', board);
@@ -65,8 +65,8 @@ function UserBoardsController(Board, $auth, $state) {
 }
 
 //SHOW BOARDS CONTROLLER
-BoardsShowController.$inject = ['Board', 'Pin', '$state'];
-function BoardsShowController(Board, Pin, $state) {
+BoardsShowController.$inject = ['Board', 'Pin', '$state', '$auth'];
+function BoardsShowController(Board, Pin, $state, $auth) {
   const boardsShow = this;
   boardsShow.formVisible = false;
   boardsShow.formEditVisible = false;
@@ -99,7 +99,11 @@ function BoardsShowController(Board, Pin, $state) {
   //SHOW COPY FORM
   function showCopyForm(pin) {
     boardsShow.copyPin = pin;
-    console.log('clicked', boardsShow.copyPin);
+
+    const payload = $auth.getPayload();
+    boardsShow.all = Board.query({ user: payload._id });
+
+    console.log('clicked', boardsShow.all);
     boardsShow.formCopyVisible = true;
   }
 
