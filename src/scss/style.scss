@@ -4,7 +4,7 @@
 @import'base/base';
 
 body {
-  background-color: blue;
+  background-color: white;
 }
 
 img {
@@ -18,8 +18,10 @@ main {
 
 .board {
   li {
-    @include span-columns(3);
-    @include omega(4n);
+    @include media(min-width 320px max-width 480px, 6) {
+    @include outer-container;
+      header { @include span-columns(3); }
+      section { @include span-columns(9); }
   }
 }
 
@@ -27,3 +29,14 @@ button {
   margin-top: 5px;
   border-radius: 10px;
 }
+
+// .image-grid {
+//   @include outer-container;
+//     header { @include span-columns(3); }
+//     section { @include span-columns(9); }
+// }
+//
+// .pin-box {
+//   height: 200px;
+//   width: 200px;
+// }

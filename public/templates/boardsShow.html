@@ -28,12 +28,20 @@
   </form>
   </section>
 
+  <!-- COPY PIN FORM -->
+  <section ng-if="boardsShow.formCopyVisible">
+    <h1>Yo</h1>
+    {{ boardsShow.copyPin }}
+    <button type="button" ng-click="boardsShow.hideCopyForm()">Hide</button>
+  </section>
+
   <!-- IMAGES REPEAT -->
-  <ul>
+  <section>
+  <ul class="board">
     <li ng-repeat="pin in boardsShow.board.pins">
       <img ng-src="{{ pin.link }}" ng-click="boardsShow.showPin(pin)">
+      <button type="button" ng-click="boardsShow.showCopyForm(pin)">Copy</button>
     </li>
   </ul>
-  <section class="pin-show">
   </section>
 </section>
