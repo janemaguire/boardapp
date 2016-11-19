@@ -145,6 +145,8 @@ function BoardsShowController(Board, Pin, $state, $auth) {
     hideEditForm();
   }
 
+  
+
   function showPin(pin) {
     console.log('clicked!', pin);
     showEditForm(pin);
