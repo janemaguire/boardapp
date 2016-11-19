@@ -80,6 +80,7 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   //SHOW COPY FORM
   function showCopyForm(pin) {
     boardsShow.copyPin = pin;
+    delete boardsShow.copyPin._id;
 
     const payload = $auth.getPayload();
     boardsShow.all = Board.query({ user: payload._id });
