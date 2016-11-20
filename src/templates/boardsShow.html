@@ -6,6 +6,11 @@
     <form ng-submit="boardsShow.createPin()">
       <div class="twelve columns">
         <label>Title</label>
+        Image Uploader
+        <imageuploader ng-controller="UploadController as upload">
+          {{ upload }}
+          <drag-drop base64="upload.data.base64"></drag-drop>
+        </imageuploader>
         <input type="text" name="title" placeholder="Title" ng-model="boardsShow.newPin.title" class="u-full-width">
         <input type="text" name="type" placeholder="Type" ng-model="boardsShow.newPin.type" class="u-full-width">
         <input type="text" name="link" placeholder="Link" ng-model="boardsShow.newPin.link" class="u-full-width">
