@@ -179,3 +179,19 @@ header {
     width: 4px;
   }
 }
+
+.drag-drop {
+  min-height: 300px;
+  width: 25%;
+  background-color: green;
+  border-radius: 5px;
+  line-height: 0;
+
+  img {
+    width: 100%;
+  }
+
+  &.active {
+    background-color: grey;
+  }
+}

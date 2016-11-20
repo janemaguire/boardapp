@@ -19,6 +19,11 @@
       </nav>
     </header>
     <p ng-if="main.message">{{ main.message }}</p>
+    Image Uploader
+    <imageuploader ng-controller="UploadController as upload">
+      {{ upload }}
+      <drag-drop base64="upload.data.base64"></drag-drop>
+    </imageuploader>
     <main ui-view>
     </main>
   </body>
