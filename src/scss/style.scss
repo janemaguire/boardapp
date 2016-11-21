@@ -29,7 +29,7 @@ main {
   @include outer-container;
   padding: 30px 20px 0;
   min-height: calc(100vh - 50px);
-}
+  }
 
 header {
   border-top: 5px solid $brand-color;
