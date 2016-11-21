@@ -1,6 +1,7 @@
 <section>
+  <input type="text" ng-model="boardsIndex.filter.title">
   <ul>
-    <li ng-repeat="board in boardsIndex.all">
+    <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter">
       <a ui-sref="boardsShow({ id: board._id })">
         <h2>{{ board.title }}</h2>
         <h2>{{ board.user.username }}</h2>

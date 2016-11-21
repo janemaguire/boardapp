@@ -53,7 +53,8 @@
   <section>
   <ul class="board">
     <li ng-repeat="pin in boardsShow.board.pins">
-      <img ng-src="{{ pin.link }}" ng-click="boardsShow.showPin(pin)">
+      <img ng-if="pin.type === 'image'" ng-src="{{ pin.link }}" ng-click="boardsShow.showPin(pin)">
+      <youtube ng-if="pin.type === 'youtube'" link="{{ pin.link }}" width="200" height="150"></youtube>
       <button type="button" ng-click="boardsShow.showCopyForm(pin)">Copy</button>
     </li>
   </ul>

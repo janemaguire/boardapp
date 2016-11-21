@@ -12,9 +12,9 @@
 
   <!-- EDIT BOARD FORM -->
   <section class="board-form" ng-if="userBoards.formEditVisible">
-    <form ng-submit="userBoards.updateBoard()">
-      <input type="text" name="title" placeholder="Title" ng-model="userBoards.board.title" class="u-full-width">
-      <button>Update</button>
+    <form ng-submit="userBoards.updateBoard(userBoards.board)">
+      <input type="text" name="title" placeholder="{{userBoards.currentBoard.title}}" ng-model="userBoards.currentBoard.title" class="u-full-width">
+      <button type="button" ng-click="userBoards.updateBoard(userBoards.currentBoard)">Update</button>
       <button type="button" ng-click="userBoards.hideEditForm()">Hide</button>
     </form>
   </section>

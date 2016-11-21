@@ -10,6 +10,7 @@ BoardsIndexController.$inject = ['Board'];
 function BoardsIndexController(Board){
   const boardsIndex = this;
 
+  boardsIndex.filter = { title: '' };
   boardsIndex.all = Board.query();
 }
 
@@ -30,10 +31,32 @@ function BoardsNewController(Board, $state) {
 UserBoardsController.$inject = ['Board', '$auth', '$state'];
 function UserBoardsController(Board, $auth, $state) {
   const userBoards = this;
+  userBoards.formEditVisible = false;
+  userBoards.currentBoard;
 
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
   console.log('clicked', userBoards.all);
+
+  function showEditForm(board) {
+    userBoards.currentBoard = board;
+    console.log('clicked!', userBoards.currentBoard);
+    userBoards.formEditVisible = true;
+  }
+
+  function hideEditForm() {
+    console.log('clicked hide form!');
+    userBoards.formEditVisible = false;
+  }
+
+  function updateBoard(currentBoard) {
+    console.log('clicked update board!', userBoards.currentBoard);
+    Board.update({ id: currentBoard._id, boardId: $state.params.id }, currentBoard);
+  }
+
+  userBoards.showEditForm = showEditForm;
+  userBoards.hideEditForm = hideEditForm;
+  userBoards.updateBoard = updateBoard;
 
   //DELETE BOARD
   function deleteBoard(board) {
@@ -153,6 +176,7 @@ function BoardsEditController(Board, $state) {
 
   function updateBoard() {
     boardsEdit.board.$update(() => {
+      console.log('clicked');
       $state.go('boardsShow', $state.params);
     });
   }
