@@ -28,7 +28,7 @@ h1 {
 main {
   @include outer-container;
   padding: 30px 20px 0;
-  min-height: calc(100vh - 50px);
+  min-height: calc(100vh - 55px);
 }
 
 header {
@@ -53,6 +53,7 @@ header {
           }
           &.active {
             position:relative;
+            opacity: 1;
             &:after {
               content: '';
               position: absolute;
@@ -121,9 +122,23 @@ header {
   .board-single {
     @include span-columns(3);
     @include omega(4n);
+    @media (max-width: 767px) {
+      @include span-columns(6);
+      @include omega(2n);
+    }
     background-color: $light-gray;
     padding: 10px;
     margin-bottom: 20px;
+    h2 {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    h3 {
+      font-size: 16px;
+    }
+    button {
+      font-size: 12px;
+    }
     .tiles {
       margin-bottom: 10px;
       ul {
@@ -156,7 +171,7 @@ header {
 }
 
 .background-image {
-  height: calc(100vh - 50px);
+  height: calc(100vh - 55px);
   width: 100vw;
   background-position: center;
   background-size: cover;
