@@ -58,11 +58,9 @@
 <!-- COPY PIN FORM -->
 <div class="overlay" ng-if="boardsShow.formCopyVisible">
   <section class="pin-form">
-    <h1>Yo</h1>
-    {{ boardsShow.all }}
+    <h2>Pick a board you want to copy this pin too...</h2>
     <li ng-repeat="board in boardsShow.all" ng-click="boardsShow.copyPinToBoard(board)">
-      <h1> {{ board.title }} </h1>
-      <h2>{{ board.user.username }}</h2>
+      <h3> {{ board.title }} </h3>
     </li>
     <button type="button" ng-click="boardsShow.hideCopyForm()">Hide</button>
   </section>

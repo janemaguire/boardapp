@@ -1,10 +1,12 @@
 <section>
-  <input type="text" ng-model="boardsIndex.filter.title">
+  <input type="text" ng-model="boardsIndex.queryString">
   <ul>
-    <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter">
+    <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter ">
       <a ui-sref="boardsShow({ id: board._id })">
         <h1>{{ board.title }}</h1>
         <h2>Pinned by: {{ board.user.username }}</h2>
+
+        <p>{{ board.tags }}</p>
       </a>
     </li>
   </ul>

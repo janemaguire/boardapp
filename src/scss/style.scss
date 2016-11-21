@@ -95,6 +95,9 @@ header {
   @media (max-width: 767px) {
     @include span-columns(10);
   }
+  li {
+    cursor: pointer;
+  }
 }
 
 .boards {

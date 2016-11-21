@@ -10,7 +10,14 @@ BoardsIndexController.$inject = ['Board'];
 function BoardsIndexController(Board){
   const boardsIndex = this;
 
-  boardsIndex.filter = { title: '' };
+  boardsIndex.queryString = '';
+
+  function filter(board) {
+    const regex = new RegExp(boardsIndex.queryString, 'i');
+    return regex.test(board.title) || regex.test(board.tags);
+  }
+
+  boardsIndex.filter = filter;
   boardsIndex.all = Board.query();
 }
 
@@ -36,11 +43,9 @@ function UserBoardsController(Board, $auth, $state) {
 
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
-  console.log('clicked', userBoards.all);
 
   function showEditForm(board) {
     userBoards.currentBoard = board;
-    console.log('clicked!', userBoards.currentBoard);
     userBoards.formEditVisible = true;
   }
 
@@ -50,7 +55,6 @@ function UserBoardsController(Board, $auth, $state) {
   }
 
   function updateBoard(currentBoard) {
-    console.log('clicked update board!', userBoards.currentBoard);
     Board.update({ id: currentBoard._id, boardId: $state.params.id }, currentBoard);
   }
 
