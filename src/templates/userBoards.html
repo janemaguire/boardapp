@@ -1,9 +1,12 @@
 <section>
+  <p>
+    Here are all your boards. Happy pinning!
+  </p>
   <ul>
     <li ng-repeat="board in userBoards.all">
       <a ui-sref="boardsShow({ id: board._id })">
         <h1> {{ board.title }} </h1>
-        <h2>{{ board.user.username }}</h2>
+        <h2>Pinned by: {{ board.user.username }}</h2>
       </a>
       <button ng-click="userBoards.showEditForm(board)">Edit</button>
       <button ng-click="userBoards.delete(board)">Delete</button>
