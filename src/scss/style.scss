@@ -2,6 +2,7 @@
 @import'bourbon/bourbon';
 @import'neat/neat';
 @import'base/base';
+@import'mixins';
 
 $light-gray: #f0f0f0;
 
@@ -41,7 +42,7 @@ header {
     padding: 0 20px;
     ul{
       li {
-        line-height: 45px;
+        line-height: 50px;
         display: inline-block;
         float: right;
         margin-left: 10px;
@@ -80,6 +81,10 @@ header {
   background-color: $light-gray;
   padding: 20px;
   @include span-columns(6);
+  img {
+    display: block;
+    margin-bottom: 0.75em;
+  }
   button {
     width: 100%;
     margin-bottom: 0.75em;
@@ -186,9 +191,20 @@ header {
 }
 
 .board {
+  margin-top: 30px;
   li {
     @include span-columns(3);
     @include omega(4n);
+    @media (max-width: 959px) {
+      @include omega-reset(4n);
+      @include span-columns(4);
+      @include omega(3n);
+    }
+    @media (max-width: 767px) {
+      @include omega-reset(3n);
+      @include span-columns(6);
+      @include omega(2n);
+    }
     background-size: cover;
     background-position: center;
     position: relative;
@@ -208,6 +224,18 @@ header {
       button {
         display: block;
       }
+    }
+    .pin-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-position: center;
+      background-size: cover;
+    }
+    iframe {
+      @include position(absolute, 0 0 0 0);
     }
   }
 }
