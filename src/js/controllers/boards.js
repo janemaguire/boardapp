@@ -1,5 +1,6 @@
 angular.module('boardApp')
   .controller('BoardsIndexController', BoardsIndexController)
+  .controller('BoardsFollowingController', BoardsFollowingController)
   .controller('BoardsNewController', BoardsNewController)
   .controller('BoardsShowController', BoardsShowController)
   .controller('BoardsEditController', BoardsEditController)
@@ -20,6 +21,16 @@ function BoardsIndexController(Board){
   boardsIndex.filter = filter;
   boardsIndex.all = Board.query();
 }
+
+//SHOW FOLLOW BOARDS
+BoardsFollowingController.$inject = ['Board', '$auth'];
+function BoardsFollowingController(Board, $auth) {
+  const boardsFollowing = this;
+  const payload = $auth.getPayload();
+
+  boardsFollowing.all = Board.query({ followedBy: payload._id });
+}
+
 
 //CREATE NEW BOARD
 BoardsNewController.$inject = ['Board', '$state'];
@@ -76,6 +87,8 @@ function UserBoardsController(Board, $auth, $state) {
 BoardsShowController.$inject = ['Board', 'Pin', '$state', '$auth'];
 function BoardsShowController(Board, Pin, $state, $auth) {
   const boardsShow = this;
+  const payload = $auth.getPayload();
+  const userId = payload._id ;
   boardsShow.formVisible = false;
   boardsShow.formEditVisible = false;
   boardsShow.board = Board.get($state.params);
@@ -158,17 +171,37 @@ function BoardsShowController(Board, Pin, $state, $auth) {
     showEditForm(pin);
   }
 
-  boardsShow.showEditForm = showEditForm;
-  boardsShow.hideEditForm = hideEditForm;
-  boardsShow.createPin = createPin;
-  boardsShow.showPin = showPin;
-
   //UPDATE BOARD CONTROLLER WITH EDIT PIN
   function updateBoard(updatedPin) {
     Pin.update({ id: updatedPin._id, boardId: $state.params.id }, updatedPin);
   }
-  boardsShow.updateBoard = updateBoard;
 
+  //FOLLOW BOARD
+  function followBoard() {
+    boardsShow.board.followedBy.push(userId);
+
+    boardsShow.board.$update((board) => {
+      console.log('succes', board);
+    });
+  }
+
+  //UN-FOLLOW BOARD
+  function unfollowBoard() {
+    const index = boardsShow.board.followedBy.indexOf(userId);
+    boardsShow.board.followedBy.splice(index,1);
+
+    boardsShow.board.$update((board) => {
+      console.log('succes', board);
+    });
+  }
+
+  boardsShow.unfollowBoard = unfollowBoard;
+  boardsShow.followBoard = followBoard;
+  boardsShow.updateBoard = updateBoard;
+  boardsShow.showEditForm = showEditForm;
+  boardsShow.hideEditForm = hideEditForm;
+  boardsShow.createPin = createPin;
+  boardsShow.showPin = showPin;
 }
 
 //EDIT BOARD

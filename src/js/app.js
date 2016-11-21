@@ -37,6 +37,11 @@ function Router($stateProvider, $urlRouterProvider) {
      templateUrl: '/templates/userBoards.html',
      controller: 'UserBoardsController as userBoards'
    })
+   .state('boardsFollowing', {
+     url: '/boards/following',
+     templateUrl: '/templates/boardsFollowing.html',
+     controller: 'BoardsFollowingController as boardsFollowing'
+   })
    .state('boardsShow', {
      url: '/boards/:id',
      templateUrl: '/templates/boardsShow.html',
