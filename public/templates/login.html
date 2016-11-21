@@ -1,19 +1,21 @@
-<section class="login">
-  <form novalidate ng-submit="login.submit()">
-    <div class="row">
-      <label>Email</label>
-      <input class="u-full-width" type="email" placeholder="Email" ng-model="login.credentials.email">
+<div class="background-image" style="background-image:url('images/testing-bg.jpeg')">
+  <section class="login">
+    <form novalidate ng-submit="login.submit()">
+      <div class="row">
+        <label>Email</label>
+        <input class="u-full-width" type="email" placeholder="Email" ng-model="login.credentials.email">
+      </div>
+      <div class="row">
+        <label>Password</label>
+        <input class="u-full-width" type="password" placeholder="Password" ng-model="login.credentials.password">
+      </div>
+      <button>Login</button>
+    </form>
+    <div class="social">
+      <img src="images/facebook.png" alt="Logo image" ng-click="login.authenticate('facebook')">
+    <!-- <button ng-click="login.authenticate('facebook')">Login with Facebook</button> -->
+      <img src="images/instagram.png" alt="Logo image" ng-click="login.authenticate('instagram')">
     </div>
-    <div class="row">
-      <label>Password</label>
-      <input class="u-full-width" type="password" placeholder="Password" ng-model="login.credentials.password">
-    </div>
-    <button>Login</button>
-  </form>
-  <div class="social">
-    <img src="images/facebook.png" alt="Logo image" ng-click="login.authenticate('facebook')">
-  <!-- <button ng-click="login.authenticate('facebook')">Login with Facebook</button> -->
-    <img src="images/instagram.png" alt="Logo image" ng-click="login.authenticate('instagram')">
-  </div>
-  <!-- <button ng-click="login.authenticate('instagram')">Login with Instagram</button> -->
-</section>
+    <!-- <button ng-click="login.authenticate('instagram')">Login with Instagram</button> -->
+  </section>
+</div>
