@@ -220,6 +220,23 @@ header {
       display: block;
       padding-bottom: 100%;
     }
+    .pin-info {
+      display: none;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      margin-right: 10px;
+      color: white;
+      // font-size: 20px;
+      border-radius: 3px;
+      padding: 12px 24px 12px 24px;
+      background-color: #6DECAF;
+    }
+    &:hover {
+      .pin-info {
+        display: block;
+      }
+    }
     button {
       display: none;
       position: absolute;
@@ -231,6 +248,8 @@ header {
         display: block;
       }
     }
+
+
     .pin-image {
       position: absolute;
       top: 0;
