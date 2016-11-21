@@ -3,7 +3,7 @@
 <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
 
 <!-- EDIT PIN FORM -->
-<section class="pin-form" ng-if="boardsShow.formEditVisible">
+<!-- <section class="pin-form" ng-if="boardsShow.formEditVisible">
   <div class="grid-items-lines"
   <a href="javascript:void(0)" class="grid-item"></a>
   <li><img ng-src="{{ boardsShow.currentPin.link }}"></li>
@@ -17,18 +17,18 @@
     <button type="button" ng-click="boardsShow.deletePin(boardsShow.currentPin);">Delete Pin</button>
 
 </form>
-</section>
+</section> -->
 
 <!-- COPY PIN FORM -->
-<section ng-if="boardsShow.formCopyVisible">
+<!-- <section ng-if="boardsShow.formCopyVisible"> -->
   <!-- <h1>Yo</h1>
   {{ boardsShow.all }} -->
-  <li ng-repeat="board in boardsShow.all" ng-click="boardsShow.copyPinToBoard(board)">
+  <!-- <li ng-repeat="board in boardsShow.all" ng-click="boardsShow.copyPinToBoard(board)">
     <h1> {{ board.title }} </h1>
     <h2>{{ board.user.username }}</h2>
   </li>
   <button type="button" ng-click="boardsShow.hideCopyForm()">Hide</button>
-</section>
+</section> -->
 
 <!-- IMAGES REPEAT -->
 <section>
@@ -63,7 +63,7 @@
 </div>
 
   </section>
-  <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
+  <!-- <button ng-click="boardsShow.showCreateForm()">Add Pin</button> -->
 
   <!-- EDIT PIN FORM -->
   <section class="pin-form" ng-if="boardsShow.formEditVisible">
@@ -84,8 +84,8 @@
 
   <!-- COPY PIN FORM -->
   <section ng-if="boardsShow.formCopyVisible">
-    <!-- <h1>Yo</h1>
-    {{ boardsShow.all }} -->
+    <h1>Yo</h1>
+    {{ boardsShow.all }}
     <li ng-repeat="board in boardsShow.all" ng-click="boardsShow.copyPinToBoard(board)">
       <h1> {{ board.title }} </h1>
       <h2>{{ board.user.username }}</h2>
