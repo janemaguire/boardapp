@@ -35,7 +35,7 @@ function facebook(req, res) {
           facebookId: profile.id,
           profileImage: profile.picture.data.url,
           email: profile.email,
-          username: `${profile.name} ${profile.id}`
+          username: profile.name
         });
       } else {
         user.facebookId = profile.id;
