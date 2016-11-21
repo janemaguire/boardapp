@@ -1,17 +1,28 @@
+<!-- IMAGES REPEAT -->
 <section>
   <h1>{{ boardsShow.board.title }}</h1>
   <h6>{{ boardsShow.board.description }}</h1>
+  <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
+  <ul class="board">
+    <li ng-repeat="pin in boardsShow.board.pins">
+      <div class="pin-image" ng-if="pin.type === 'image'" style="background-image:url('{{ pin.link }}')" ng-click="boardsShow.showPin(pin)"></div>
+      <youtube ng-if="pin.type === 'youtube'" link="{{ pin.link }}" width="100%" height="100%"></youtube>
+      <button type="button" ng-click="boardsShow.showCopyForm(pin)">Copy</button>
+    </li>
+  </ul>
+</section>
 
-  <!-- ADD PIN FORM -->
-  <section class="pin-form" ng-if="boardsShow.formVisible">
+<!-- ADD PIN FORM -->
+<div class="overlay" ng-if="boardsShow.formVisible">
+  <div class="pin-form">
     <form ng-submit="boardsShow.createPin()">
       <div class="twelve columns">
         <label>Title</label>
-        Image Uploader
+        <!-- Image Uploader
         <imageuploader ng-controller="UploadController as upload">
           {{ upload }}
           <drag-drop base64="upload.data.base64"></drag-drop>
-        </imageuploader>
+        </imageuploader> -->
         <input type="text" name="title" placeholder="Title" ng-model="boardsShow.newPin.title" class="u-full-width">
         <select class="typeSelect" ng-model="boardsShow.newPin.type">
           <option value="image">Image</option>
@@ -22,14 +33,13 @@
       <button>Create</button>
       <button type="button" ng-click="boardsShow.hideCreateForm()">Cancel</button>
     </form>
-  </section>
-  <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
+  </div>
+</div>
 
-  <!-- EDIT PIN FORM -->
-  <section class="pin-form" ng-if="boardsShow.formEditVisible">
-    <div class="grid-items-lines"
-    <a href="javascript:void(0)" class="grid-item"></a>
-    <li><img ng-src="{{ boardsShow.currentPin.link }}"></li>
+<!-- EDIT PIN FORM -->
+<div class="overlay" ng-if="boardsShow.formEditVisible">
+  <section class="pin-form">
+    <img ng-src="{{ boardsShow.currentPin.link }}">
     <form>
       <input type="text" name="title" placeholder="Title" ng-model="boardsShow.currentPin.title" class="u-full-width">
       <select class="typeSelect" ng-model="boardsShow.newPin.type">
@@ -41,27 +51,19 @@
       <button type="button" ng-click="boardsShow.updateBoard(boardsShow.currentPin); boardsShow.hideEditForm()">Update</button>
       <button type="button" ng-click="boardsShow.hideEditForm()">Hide</button>
       <button type="button" ng-click="boardsShow.deletePin(boardsShow.currentPin);">Delete Pin</button>
-
-  </form>
+    </form>
   </section>
+</div>
 
-  <!-- COPY PIN FORM -->
-  <section ng-if="boardsShow.formCopyVisible">
+<!-- COPY PIN FORM -->
+<div class="overlay" ng-if="boardsShow.formCopyVisible">
+  <section class="pin-form">
+    <h1>Yo</h1>
+    {{ boardsShow.all }}
     <li ng-repeat="board in boardsShow.all" ng-click="boardsShow.copyPinToBoard(board)">
       <h1> {{ board.title }} </h1>
       <h2>{{ board.user.username }}</h2>
     </li>
     <button type="button" ng-click="boardsShow.hideCopyForm()">Hide</button>
   </section>
-
-  <!-- IMAGES REPEAT -->
-  <section>
-  <ul class="board">
-    <li ng-repeat="pin in boardsShow.board.pins">
-      <img ng-if="pin.type === 'image'" ng-src="{{ pin.link }}" ng-click="boardsShow.showPin(pin)">
-      <youtube ng-if="pin.type === 'youtube'" link="{{ pin.link }}" width="200" height="150"></youtube>
-      <button type="button" ng-click="boardsShow.showCopyForm(pin)">Copy</button>
-    </li>
-  </ul>
-  </section>
-</section>
+</div>

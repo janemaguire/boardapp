@@ -1,7 +1,24 @@
-<section>
-  <p>
-    Here are all your boards. Happy pinning!
-  </p>
+<p>
+  Here are all your boards. Happy pinning!
+</p>
+<ul class="boards">
+  <li ng-repeat="board in userBoards.all" class="board-single">
+    <div class="tiles">
+      <ul>
+        <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
+      </ul>
+    </div>
+    <a ui-sref="boardsShow({ id: board._id })">
+      <h2>{{ board.title }}</h2>
+      <h3>{{ board.user.username }}</h3>
+    </a>
+    <button ng-click="userBoards.showEditForm(board)">Edit</button>
+    <button ng-click="userBoards.delete(board)">Delete</button>
+  </li>
+</ul>
+
+<!-- <section>
+
   <ul>
     <li ng-repeat="board in userBoards.all">
       <a ui-sref="boardsShow({ id: board._id })">
@@ -11,7 +28,7 @@
       <button ng-click="userBoards.showEditForm(board)">Edit</button>
       <button ng-click="userBoards.delete(board)">Delete</button>
     </li>
-  </ul>
+  </ul> -->
 
   <!-- EDIT BOARD FORM -->
   <section class="board-form" ng-if="userBoards.formEditVisible">
@@ -27,4 +44,12 @@
     </form>
   </section>
 
-</section>
+<!--
+<!- EDIT BOARD FORM -->
+<!-- <section class="board-form" ng-if="userBoards.formEditVisible">
+  <form ng-submit="userBoards.updateBoard()">
+    <input type="text" name="title" placeholder="Title" ng-model="userBoards.board.title" class="u-full-width">
+    <button>Update</button>
+    <button type="button" ng-click="userBoards.hideEditForm()">Hide</button>
+  </form>
+</section> -->
