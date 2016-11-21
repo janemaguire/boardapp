@@ -33,6 +33,7 @@ function UserBoardsController(Board, $auth, $state) {
   const userBoards = this;
   userBoards.formEditVisible = false;
   userBoards.currentBoard;
+  userBoards.showDeleteForm = false;
 
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
@@ -49,19 +50,35 @@ function UserBoardsController(Board, $auth, $state) {
     userBoards.formEditVisible = false;
   }
 
+  function showDeleteForm() {
+    // userBoards.currentBoard = board;
+    console.log('clicked show delete form!');
+    // userBoards.showDeleteForm = true;
+  }
+
+  function hideDeleteForm() {
+    console.log('clicked delete form!');
+    userBoards.showDeleteForm = false;
+  }
+
+
   function updateBoard(currentBoard) {
     console.log('clicked update board!', userBoards.currentBoard);
     Board.update({ id: currentBoard._id, boardId: $state.params.id }, currentBoard);
+    console.log('Why?');
   }
 
   userBoards.showEditForm = showEditForm;
   userBoards.hideEditForm = hideEditForm;
   userBoards.updateBoard = updateBoard;
+  userBoards.showDeleteForm = showDeleteForm;
+  userBoards.hideDeleteForm = hideDeleteForm;
 
   //DELETE BOARD
-  function deleteBoard(board) {
-    console.log('clicked!', board);
-    board.$remove(() => {
+  function deleteBoard(deletedBoard) {
+    console.log('clciked delete', deletedBoard);
+    console.log('clicked!', deletedBoard);
+    deletedBoard.$remove(() => {
       $state.reload();
     });
   }
@@ -75,6 +92,7 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   boardsShow.formVisible = false;
   boardsShow.formEditVisible = false;
   boardsShow.board = Board.get($state.params);
+  // boardsShow.showDeleteForm = false;
 
   //ADD PIN CONTROLLER
   boardsShow.newPin = {};

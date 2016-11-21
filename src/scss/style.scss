@@ -108,7 +108,7 @@ header {
     padding: 10px;
     margin-bottom: 20px;
     .tiles {
-      margin-bottom: 10px;
+      margin-bottom: 1  0px;
       ul {
         border-radius: 3px;
         overflow: hidden;
@@ -122,7 +122,7 @@ header {
           }
           &:first-of-type {
             margin-bottom: 4px;
-            width: 100%;
+            width: 150%;
             &:after {
               padding-bottom: 50%;
             }

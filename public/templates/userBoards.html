@@ -13,7 +13,7 @@
       <h3>{{ board.user.username }}</h3>
     </a>
     <button ng-click="userBoards.showEditForm(board)">Edit</button>
-    <button ng-click="userBoards.delete(board)">Delete</button>
+    <button  ng-click="userBoards.showDeleteForm(board)">Delete</button>
   </li>
 </ul>
 
@@ -43,6 +43,14 @@
       <button type="button" ng-click="userBoards.hideEditForm()">Hide</button>
     </form>
   </section>
+
+  <div class="overlay" ng-if="userBoards.showDeleteForm">
+  <section class="pin-form">
+    <h2>Are you sure you want to Delete this board?</h2>
+    <button type="button" ng-click="userBoards.hideDeleteForm(userBoards.deletedBoard)">Cancel</button>
+    <button ng-click="userBoards.delete(board)">Delete</button>
+  </section>
+</div>
 
 <!--
 <!- EDIT BOARD FORM -->
