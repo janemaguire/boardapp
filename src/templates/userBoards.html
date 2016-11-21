@@ -33,8 +33,13 @@
   <!-- EDIT BOARD FORM -->
   <section class="board-form" ng-if="userBoards.formEditVisible">
     <form ng-submit="userBoards.updateBoard(userBoards.board)">
+      <p>Title</p>
       <input type="text" name="title" placeholder="{{userBoards.currentBoard.title}}" ng-model="userBoards.currentBoard.title" class="u-full-width">
-      <button type="button" ng-click="userBoards.updateBoard(userBoards.currentBoard)">Update</button>
+      <p>Description</p>
+      <input type="text" name="title" placeholder="{{userBoards.currentBoard.description}}" ng-model="userBoards.currentBoard.description" class="u-full-width">
+      <p>Tags</p>
+      <input type="text" name="tags" placeholder="{{userBoards.currentBoard.tags}}" ng-model="userBoards.currentBoard.tags" class="u-full-width">
+      <button type="button" ng-click="userBoards.updateBoard(userBoards.currentBoard); userBoards.hideEditForm()">Update</button>
       <button type="button" ng-click="userBoards.hideEditForm()">Hide</button>
     </form>
   </section>
