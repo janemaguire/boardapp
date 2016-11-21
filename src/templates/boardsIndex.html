@@ -1,11 +1,15 @@
 <section>
   <input type="text" ng-model="boardsIndex.queryString">
-  <ul>
-    <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter ">
+  <ul class="boards">
+    <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter " class="board-single">
       <a ui-sref="boardsShow({ id: board._id })">
-        <h1>{{ board.title }}</h1>
-        <h2>Pinned by: {{ board.user.username }}</h2>
-
+        <div class="tiles">
+          <ul>
+            <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
+          </ul>
+        </div>
+        <h2>{{ board.title }}</h2>
+        <h3>{{ board.user.username }}</h3>
         <p>{{ board.tags }}</p>
       </a>
     </li>
