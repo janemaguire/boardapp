@@ -12,7 +12,7 @@ function youtube() {
     },
     template: '<iframe width="{{ width }}" height="{{ height }}" src="{{ src }}" frameborder="0" allowfullscreen></iframe>',
     link($scope) {
-      $scope.src = `https://www.youtube.com/embed/${$scope.link.split('/').splice(-1)[0]}`;
+      $scope.src = `https://www.youtube.com/embed/${$scope.link.split('=').splice(-1)[0]}`;
     }
   };
 }
