@@ -5,6 +5,7 @@
   <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
   <ul class="board">
     <li ng-repeat="pin in boardsShow.board.pins">
+      <p class="pin-info">{{ pin.title}}</p>
       <div class="pin-image" ng-if="pin.type === 'image'" style="background-image:url('{{ pin.link }}')" ng-click="boardsShow.showPin(pin)"></div>
       <youtube ng-if="pin.type === 'youtube'" link="{{ pin.link }}" width="100%" height="100%"></youtube>
       <button type="button" ng-click="boardsShow.showCopyForm(pin)">Copy</button>
