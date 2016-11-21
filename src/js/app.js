@@ -1,7 +1,8 @@
 angular
  .module('boardApp', ['ngResource', 'ui.router', 'satellizer'])
  .config(Router)
- .config(Auth);
+ .config(Auth)
+ .config(WhiteList);
 
 Router.$inject = ['$stateProvider', '$urlRouterProvider'];
 function Router($stateProvider, $urlRouterProvider) {
@@ -68,4 +69,12 @@ function Auth($authProvider) {
   $authProvider.instagram({
     clientId: '64171eadf0914dd7bf7839bc034e42e0'
   });
+}
+
+WhiteList.$inject = ['$sceDelegateProvider'];
+function WhiteList($sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'self',
+    'https://www.youtube.com/**'
+  ]);
 }
