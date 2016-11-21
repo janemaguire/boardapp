@@ -179,28 +179,22 @@ function BoardsShowController(Board, Pin, $state, $auth) {
 
   //FOLLOW BOARD
   function followBoard() {
-    if(boardsShow.board.followedBy.indexOf(userId)<0) {
-      console.log("board not already followed");
-      boardsShow.board.followedBy.push(userId);
+    console.log('board not already followed');
+    boardsShow.board.followedBy.push(userId);
 
-      boardsShow.board.$update((board) => {
-        console.log('succes', board);
-      });
-    }
-    followCount++;
+    boardsShow.board.$update((board) => {
+      console.log('succes, followed board:', board);
+    });
   }
 
   //UN-FOLLOW BOARD
   function unfollowBoard() {
-    if(followCount<1) {
-      const index = boardsShow.board.followedBy.indexOf(userId);
-      boardsShow.board.followedBy.splice(index,1);
+    const index = boardsShow.board.followedBy.indexOf(userId);
+    boardsShow.board.followedBy.splice(index,1);
 
-      boardsShow.board.$update((board) => {
-        console.log('succes', board);
-      });
-    }
-    followCount--;
+    boardsShow.board.$update((board) => {
+      console.log('succes, unfollowed board:', board);
+    });
   }
 
   boardsShow.unfollowBoard = unfollowBoard;
