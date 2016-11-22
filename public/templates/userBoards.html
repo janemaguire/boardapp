@@ -1,34 +1,22 @@
 <p>
-  Here are all your boards. Happy pinning! <a href="#">Ugh</a>
+  Here are all your boards. Happy pinning!
 </p>
 <ul class="boards">
   <li ng-repeat="board in userBoards.all" class="board-single">
-    <div class="tiles">
-      <ul>
-        <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
-      </ul>
-    </div>
-    <a id="board-links" ui-sref="boardsShow({ id: board._id })">
+    <a ui-sref="boardsShow({ id: board._id })">
+      <div class="tiles">
+        <ul>
+          <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
+        </ul>
+      </div>
       <h2>{{ board.title }}</h2>
-      <h3>{{ board.user.username }}</h3>
+      <h3>Created by {{ board.user.username }}</h3>
+      <p>Tags: {{ board.tags }}</p>
     </a>
     <button ng-click="userBoards.showEditForm(board)">Edit</button>
-    <button  ng-click="userBoards.showDeleteForm(board)">Delete</button>
+    <button ng-click="userBoards.showDeleteVerification(board)">Delete</button>
   </li>
 </ul>
-
-<!-- <section>
-
-  <ul>
-    <li ng-repeat="board in userBoards.all">
-      <a ui-sref="boardsShow({ id: board._id })">
-        <h1> {{ board.title }} </h1>
-        <h2>Pinned by: {{ board.user.username }}</h2>
-      </a>
-      <button ng-click="userBoards.showEditForm(board)">Edit</button>
-      <button ng-click="userBoards.delete(board)">Delete</button>
-    </li>
-  </ul> -->
 
   <!-- EDIT BOARD FORM -->
   <div class="overlay" ng-if="userBoards.formEditVisible">
@@ -46,20 +34,12 @@
     </section>
   </div>
 
-  <div class="overlay" ng-if="userBoards.showDeleteForm">
-  <section class="pin-form">
-    <h2>Are you sure you want to Delete this board?</h2>
-    <button type="button" ng-click="userBoards.hideDeleteForm(userBoards.deletedBoard)">Cancel</button>
-    <button ng-click="userBoards.delete(board)">Delete</button>
-  </section>
-</div>
-
-<!--
-<!- EDIT BOARD FORM -->
-<!-- <section class="board-form" ng-if="userBoards.formEditVisible">
-  <form ng-submit="userBoards.updateBoard()">
-    <input type="text" name="title" placeholder="Title" ng-model="userBoards.board.title" class="u-full-width">
-    <button>Update</button>
-    <button type="button" ng-click="userBoards.hideEditForm()">Hide</button>
-  </form>
-</section> -->
+  <!-- DELETE VERIFICATION  -->
+  <div class="overlay" ng-if="userBoards.deleteVerificationVisible">
+    <section class="pin-form">
+      <p>Are you sure you want to delete this board?</p>
+      <button ng-click="userBoards.delete()">Delete</button>
+      <button ng-click="userBoards.hideDeleteVerification()">Cancel</button>
+      <!-- <button ng-click="userBoards.delete(board)">Delete</button> -->
+    </section>
+  </div>

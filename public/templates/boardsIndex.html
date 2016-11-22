@@ -1,10 +1,16 @@
 <section>
-  <input type="text" ng-model="boardsIndex.queryString">
-  <ul>
-    <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter ">
-      <a ui-sref="boardsShow({ id: board._id })">
-        <h1>{{ board.title }}</h1>
-        <h2>Pinned by: {{ board.user.username }}</h2>
+  <h2>Search for boards....</h2>
+  <input type="text" ng-model="boardsIndex.queryString" placeholder="Titles, tags, users">
+  <ul class="boards">
+    <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter " class="board-single">
+      <a ui-sref="boardsShow({ id: board._id })"
+        <div class="tiles">
+          <ul>
+            <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
+          </ul>
+        </div>
+        <h2>{{ board.title }}</h2>
+        <h3>Created by {{ board.user.username }}</h3>
         <p>Tags: {{ board.tags }}</p>
       </a>
     </li>

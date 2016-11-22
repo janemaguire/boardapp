@@ -50,8 +50,9 @@ UserBoardsController.$inject = ['Board', '$auth', '$state'];
 function UserBoardsController(Board, $auth, $state) {
   const userBoards = this;
   userBoards.formEditVisible = false;
+  userBoards.deleteVerificationVisible = false;
   userBoards.currentBoard;
-  userBoards.showDeleteForm = false;
+  userBoards.deleteBoard;
 
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
@@ -66,38 +67,36 @@ function UserBoardsController(Board, $auth, $state) {
     userBoards.formEditVisible = false;
   }
 
-  function showDeleteForm() {
-    // userBoards.currentBoard = board;
-    console.log('clicked show delete form!');
-    userBoards.showDeleteForm = true;
-  }
-
-  function hideDeleteForm() {
-    console.log('clicked delete form!');
-    userBoards.showDeleteForm = false;
-  }
-
-
   function updateBoard(currentBoard) {
     Board.update({ id: currentBoard._id, boardId: $state.params.id }, currentBoard);
-    console.log('Why?');
   }
 
-  userBoards.showEditForm = showEditForm;
-  userBoards.hideEditForm = hideEditForm;
-  userBoards.updateBoard = updateBoard;
-  userBoards.showDeleteForm = showDeleteForm;
-  userBoards.hideDeleteForm = hideDeleteForm;
+  //SHOW DELETE VERIFICATION
+  function showDeleteVerification(board) {
+    userBoards.deleteBoard = board;
+    console.log('clicked', userBoards.deleteBoard);
+    userBoards.deleteVerificationVisible = true;
+  }
+
+  //HIDE DELETE VERIFICATION
+  function hideDeleteVerification() {
+    userBoards.deleteVerificationVisible = false;
+  }
 
   //DELETE BOARD
-  function deleteBoard(deletedBoard) {
-    console.log('clciked delete', deletedBoard);
-    console.log('clicked!', deletedBoard);
-    deletedBoard.$remove(() => {
+  function deleteBoard() {
+    console.log('DELETED!', userBoards.deleteBoard);
+    userBoards.deleteBoard.$remove(() => {
       $state.reload();
     });
   }
+
   userBoards.delete = deleteBoard;
+  userBoards.showDeleteVerification = showDeleteVerification;
+  userBoards.showEditForm = showEditForm;
+  userBoards.hideEditForm = hideEditForm;
+  userBoards.updateBoard = updateBoard;
+  userBoards.hideDeleteVerification = hideDeleteVerification;
 }
 
 //SHOW BOARDS CONTROLLER
@@ -106,11 +105,20 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   const boardsShow = this;
   const payload = $auth.getPayload();
   const userId = payload._id ;
-  let followCount = 1;
+  boardsShow.following = false;
+  boardsShow.isOwnBoard = false;
   boardsShow.formVisible = false;
   boardsShow.formEditVisible = false;
-  boardsShow.board = Board.get($state.params);
-  // boardsShow.showDeleteForm = false;
+  boardsShow.showPinContent = false;
+  boardsShow.board = Board.get($state.params, () => {
+    if(boardsShow.board.followedBy.indexOf(userId)>-1) {
+      boardsShow.following = true;
+    }
+    if(boardsShow.board.user._id === userId) {
+      boardsShow.isOwnBoard = true;
+      console.log(true);
+    }
+  });
 
   //ADD PIN CONTROLLER
   boardsShow.newPin = {};
@@ -168,10 +176,26 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   function showEditForm(pin) {
     boardsShow.formEditVisible = true;
     boardsShow.currentPin = pin;
+    boardsShow.pinContentVisible = false;
   }
 
   function hideEditForm() {
     boardsShow.formEditVisible = false;
+  }
+
+  function showPinContent(pin) {
+    boardsShow.currentPin = pin;
+    console.log('clicked!', pin);
+    boardsShow.pinContentVisible = true;
+  }
+
+  function hidePinContent() {
+    boardsShow.pinContentVisible = false;
+  }
+
+  function showPin(pin) {
+    console.log('clicked!', pin);
+    showEditForm(pin);
   }
 
   function deletePin(pin) {
@@ -184,12 +208,6 @@ function BoardsShowController(Board, Pin, $state, $auth) {
 
   boardsShow.deletePin = deletePin;
 
-  function showPin(pin) {
-    console.log('clicked!', pin);
-
-    showEditForm(pin);
-  }
-
   //UPDATE BOARD CONTROLLER WITH EDIT PIN
   function updateBoard(updatedPin) {
     Pin.update({ id: updatedPin._id, boardId: $state.params.id }, updatedPin);
@@ -197,11 +215,11 @@ function BoardsShowController(Board, Pin, $state, $auth) {
 
   //FOLLOW BOARD
   function followBoard() {
-    console.log('board not already followed');
     boardsShow.board.followedBy.push(userId);
 
     boardsShow.board.$update((board) => {
       console.log('succes, followed board:', board);
+      boardsShow.following = true;
     });
   }
 
@@ -212,6 +230,7 @@ function BoardsShowController(Board, Pin, $state, $auth) {
 
     boardsShow.board.$update((board) => {
       console.log('succes, unfollowed board:', board);
+      boardsShow.following = false;
     });
   }
 
@@ -222,6 +241,9 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   boardsShow.hideEditForm = hideEditForm;
   boardsShow.createPin = createPin;
   boardsShow.showPin = showPin;
+  boardsShow.showPinContent = showPinContent;
+  boardsShow.hidePinContent = hidePinContent;
+
 }
 
 //EDIT BOARD
