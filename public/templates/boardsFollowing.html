@@ -1,9 +1,17 @@
 <section>
-  <h3>Here are the baords you are following...</h3>
-  <li ng-repeat="board in boardsFollowing.all">
-    <a ui-sref="boardsShow({ id: board._id })">
-      <h1>{{ board.title }}</h1>
-      <h2>Pinned by: {{ board.user.username }}</h2>
-    </a>
-  </li>
+  <h3>Here are the boards you are following...</h3>
+  <ul class="boards">
+    <li ng-repeat="board in boardsFollowing.all" class="board-single">
+      <a ui-sref="boardsShow({ id: board._id })">
+        <div class="tiles">
+          <ul>
+            <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
+          </ul>
+        </div>
+        <h2>{{ board.title }}</h2>
+        <h3>Board by: {{ board.user.username }}</h3>
+        <h4>Tags:{{ board.user.tags}}</h4>
+      </a>
+    </li>
+  </ul>
 </section>

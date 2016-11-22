@@ -3,14 +3,15 @@
 </p>
 <ul class="boards">
   <li ng-repeat="board in userBoards.all" class="board-single">
-    <div class="tiles">
-      <ul>
-        <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
-      </ul>
-    </div>
-    <a id="board-links" ui-sref="boardsShow({ id: board._id })">
+    <a ui-sref="boardsShow({ id: board._id })">
+      <div class="tiles">
+        <ul>
+          <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
+        </ul>
+      </div>
       <h2>{{ board.title }}</h2>
-      <h3>{{ board.user.username }}</h3>
+      <h3>Created by {{ board.user.username }}</h3>
+      <p>Tags: {{ board.tags }}</p>
     </a>
     <button ng-click="userBoards.showEditForm(board)">Edit</button>
     <button ng-click="userBoards.delete(board)">Delete</button>

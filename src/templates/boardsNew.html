@@ -1,14 +1,16 @@
-<section>
-  <h1>Create Board Form</h1>
-  <form ng-submit="boardsNew.create()">
-    <div class="twelve columns">
-      <label>Title</label>
-      <input type="text" name="title" placeholder="Title" ng-model="boardsNew.board.title" class="u-full-width">
-      <label>Description</label>
-      <input type="text" name="title" placeholder="Title" ng-model="boardsNew.board.description" class="u-full-width">
-      <label>Tags</label>
-      <input type="text" name="title" placeholder="Tags separated by commas" ng-model="boardsNew.board.tags" class="u-full-width">
-    </div>
-    <button>Create</button>
-  </form>
-</section>
+<div class="background-image" style="background-image:url('images/testing-bg.jpeg')">
+  <section class="login">
+    <h1>Create Board Form</h1>
+    <form ng-submit="boardsNew.create()">
+      <div class="twelve columns">
+        <label>Title</label>
+        <input type="text" name="title" placeholder="Title" ng-model="boardsNew.board.title" class="u-full-width">
+        <label>Description</label>
+        <input type="text" name="title" placeholder="Title" ng-model="boardsNew.board.description" class="u-full-width">
+        <label>Tags</label>
+        <input type="text" name="title" placeholder="Tags separated by commas" ng-model="boardsNew.board.tags" class="u-full-width">
+      </div>
+      <button>Create</button>
+    </form>
+  </section>
+</div>
