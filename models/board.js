@@ -11,8 +11,9 @@ const boardsSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true},
   description: { type: String, trim: true},
   pins: [ pinSchema ],
-  tags: [{ type: String, required: true, trim: true }],
-  user: { type: mongoose.Schema.ObjectId, ref: 'User' }
+  tags: { type: String, required: true, trim: true },
+  user: { type: mongoose.Schema.ObjectId, ref: 'User' },
+  followedBy: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
 });
 
 module.exports = mongoose.model('Board', boardsSchema);

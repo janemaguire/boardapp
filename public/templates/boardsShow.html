@@ -8,6 +8,7 @@
       <div class="pin-image" ng-if="pin.type === 'image'" style="background-image:url('{{ pin.link }}')" ng-click="boardsShow.showPin(pin)"></div>
       <youtube ng-if="pin.type === 'youtube'" link="{{ pin.link }}" width="100%" height="100%"></youtube>
       <button type="button" ng-click="boardsShow.showCopyForm(pin)">Copy</button>
+      <p class="pin-info">{{ pin.title}}</p>
     </li>
   </ul>
 </section>
@@ -55,18 +56,13 @@
     </section>
   </div>
 
-  <!-- COPY PIN FORM -->
-  <div class="overlay" ng-if="boardsShow.formCopyVisible">
-    <section class="pin-form">
-      <p>
-        Copy to one of your boards:
-      </p>
-      <!-- <h1>Yo</h1>
-      {{ boardsShow.all }} -->
-      <li ng-repeat="board in boardsShow.all" ng-click="boardsShow.copyPinToBoard(board)">
-        <h1> {{ board.title }} </h1>
-        <!-- <h2>{{ board.user.username }}</h2> -->
-      </li>
-        <button type="button" ng-click="boardsShow.hideCopyForm()">Cancel</button>
-    </section>
-  </div>
+<!-- COPY PIN FORM -->
+<div class="overlay" ng-if="boardsShow.formCopyVisible">
+  <section class="pin-form">
+    <h2>Pick a board you want to copy this pin too...</h2>
+    <li ng-repeat="board in boardsShow.all" ng-click="boardsShow.copyPinToBoard(board)">
+      <h3> {{ board.title }} </h3>
+    </li>
+    <button type="button" ng-click="boardsShow.hideCopyForm()">Cancel</button>
+  </section>
+</div>

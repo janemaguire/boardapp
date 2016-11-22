@@ -19,7 +19,6 @@ $font-size: Helvetica, sans-serif;
 $primary-color: black;
 $text-align: center;
 
-
 h1 {
   font-size: 28px;
   text-transform: uppercase;
@@ -30,7 +29,7 @@ main {
   @include outer-container;
   padding: 30px 20px 0;
   min-height: calc(100vh - 50px);
-}
+  }
 
 header {
   border-top: 5px solid $brand-color;
@@ -48,7 +47,22 @@ header {
         margin-left: 10px;
         color: #000000;
         a {
-          color: #000000;
+          transition: all 0.2s ease;
+          &:hover {
+            opacity: 0.5;
+          }
+          &.active {
+            position:relative;
+            &:after {
+              content: '';
+              position: absolute;
+              width: 100%;
+              height: 3px;
+              bottom: -2px;
+              left: 0;
+              background-color: $brand-color;
+            }
+          }
         }
         &:nth-child(1) {
           float: left;
@@ -98,6 +112,9 @@ header {
   @media (max-width: 767px) {
     @include span-columns(10);
   }
+  li {
+    cursor: pointer;
+  }
 }
 
 .boards {
@@ -115,6 +132,8 @@ header {
         li {
           width: calc(50% - 2px);
           float: left;
+          background-position: center;
+          background-size: cover;
           &:after {
             content: "";
             display: block;
@@ -217,6 +236,23 @@ header {
       display: block;
       padding-bottom: 100%;
     }
+    .pin-info {
+      display: none;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      margin-right: 10px;
+      color: white;
+      // font-size: 20px;
+      border-radius: 3px;
+      padding: 12px 24px 12px 24px;
+      background-color: #6DECAF;
+    }
+    &:hover {
+      .pin-info {
+        display: block;
+      }
+    }
     button {
       display: none;
       position: absolute;
@@ -228,6 +264,8 @@ header {
         display: block;
       }
     }
+
+
     .pin-image {
       position: absolute;
       top: 0;

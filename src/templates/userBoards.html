@@ -1,5 +1,5 @@
 <p>
-  Here are all your boards. Happy pinning!
+  Here are all your boards. Happy pinning! <a href="#">Ugh</a>
 </p>
 <ul class="boards">
   <li ng-repeat="board in userBoards.all" class="board-single">
@@ -8,7 +8,7 @@
         <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
       </ul>
     </div>
-    <a ui-sref="boardsShow({ id: board._id })">
+    <a id="board-links" ui-sref="boardsShow({ id: board._id })">
       <h2>{{ board.title }}</h2>
       <h3>{{ board.user.username }}</h3>
     </a>
@@ -31,18 +31,20 @@
   </ul> -->
 
   <!-- EDIT BOARD FORM -->
-  <section class="board-form" ng-if="userBoards.formEditVisible">
-    <form ng-submit="userBoards.updateBoard(userBoards.board)">
-      <p>Title</p>
-      <input type="text" name="title" placeholder="{{userBoards.currentBoard.title}}" ng-model="userBoards.currentBoard.title" class="u-full-width">
-      <p>Description</p>
-      <input type="text" name="title" placeholder="{{userBoards.currentBoard.description}}" ng-model="userBoards.currentBoard.description" class="u-full-width">
-      <p>Tags</p>
-      <input type="text" name="tags" placeholder="{{userBoards.currentBoard.tags}}" ng-model="userBoards.currentBoard.tags" class="u-full-width">
-      <button type="button" ng-click="userBoards.updateBoard(userBoards.currentBoard); userBoards.hideEditForm()">Update</button>
-      <button type="button" ng-click="userBoards.hideEditForm()">Hide</button>
-    </form>
-  </section>
+  <div class="overlay" ng-if="userBoards.formEditVisible">
+    <section class="pin-form">
+      <form ng-submit="userBoards.updateBoard(userBoards.board)">
+        <p>Title</p>
+        <input type="text" name="title" placeholder="{{userBoards.currentBoard.title}}" ng-model="userBoards.currentBoard.title" class="u-full-width">
+        <p>Description</p>
+        <input type="text" name="title" placeholder="{{userBoards.currentBoard.description}}" ng-model="userBoards.currentBoard.description" class="u-full-width">
+        <p>Tags</p>
+        <input type="text" name="tags" placeholder="{{userBoards.currentBoard.tags}}" ng-model="userBoards.currentBoard.tags" class="u-full-width">
+        <button type="button" ng-click="userBoards.updateBoard(userBoards.currentBoard); userBoards.hideEditForm()">Update Board</button>
+        <button type="button" ng-click="userBoards.hideEditForm()">Cancel</button>
+      </form>
+    </section>
+  </div>
 
   <div class="overlay" ng-if="userBoards.showDeleteForm">
   <section class="pin-form">
