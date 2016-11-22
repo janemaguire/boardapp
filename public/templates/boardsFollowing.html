@@ -5,10 +5,7 @@
       <a ui-sref="boardsShow({ id: board._id })">
         <div class="tiles">
           <ul>
-            <li ng-repeat="pin in board.pins | limitTo : 3" ng-if="pin.type === 'image'" style="background-image:url('{{ pin.link }}')">
-              <!-- <youtube ng-if="pin.type === 'youtube'" style="background-image:url('{{ pin.link }}')" width="100%" height="100%"></youtube>
-              <div ng-if="pin.type === 'youtube'" class="youtube-overlay"></div> -->
-            </li>
+            <li ng-repeat="pin in board.pins | limitTo : 3" ng-if="pin.type === 'image'" style="background-image:url('{{ pin.link }}')"></li>
           </ul>
         </div>
         <h2>{{ board.title }}</h2>
