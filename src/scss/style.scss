@@ -71,11 +71,49 @@ header {
             }
           }
         }
-        &:nth-child(1) {
+        &.logo {
           float: left;
           margin-left: 0;
           font-size: 26px;
           font-weight: bold;
+        }
+        &.burger {
+          display: none;
+        }
+      }
+      @media (max-width: 767px) {
+        .dropdown {
+          background-color: white;
+          overflow: hidden;
+          width: 100%;
+          z-index: 100;
+          position: absolute;
+          top: 55px;
+          left: 0;
+          padding: 0 20px;
+          border-top: 1px solid #f9f9f9;
+          li {
+            display: none;
+          }
+          &.active {
+            li {
+              display: block;
+              float: none;
+              text-align: center;
+              &:first-of-type {
+                margin-top: 10px;
+              }
+              &:last-of-type {
+                margin-bottom: 10px;
+              }
+            }
+          }
+        }
+        li {
+          &.burger {
+            display: block;
+            cursor: pointer;
+          }
         }
       }
     }
@@ -179,6 +217,16 @@ header {
   .board-single {
     @include span-columns(3);
     @include omega(4n);
+    @media (max-width: 959px) {
+      @include omega-reset(4n);
+      @include span-columns(6);
+      @include omega(2n);
+    }
+    @media (max-width: 767px) {
+      @include span-columns(12);
+      height: auto;
+      // @include omega(2n);
+    }
     background-color: $light-gray;
     padding: 10px;
     margin-bottom: 20px;

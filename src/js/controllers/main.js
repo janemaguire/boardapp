@@ -20,4 +20,13 @@ function MainController($auth, $state, $rootScope) {
       $state.go('login');
     }
   });
+
+  main.menuVisible = false;
+
+  function toggleMenu() {
+    console.log('clicked');
+    main.menuVisible = main.menuVisible ? false : true;
+  }
+
+  main.toggleMenu = toggleMenu;
 }
