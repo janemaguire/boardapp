@@ -11,7 +11,7 @@ function RegisterController($auth, $state) {
   function submit() {
     $auth.signup(register.user)
       .then(() => {
-        $state.go('menu');
+        $state.go('login');
       });
   }
 
