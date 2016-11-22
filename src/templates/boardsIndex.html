@@ -1,5 +1,5 @@
 <section>
-  <h2>Search for boards....</h2>
+  <h3>Search for boards....</h3>
   <input type="text" ng-model="boardsIndex.queryString" placeholder="Search by titles, tags, pins...">
   <ul class="boards">
     <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter " class="board-single">
