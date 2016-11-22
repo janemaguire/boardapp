@@ -45,6 +45,7 @@
 <!-- SHOW PIN CONTENT FORM -->
 <div class="overlay" ng-if="boardsShow.pinContentVisible">
   <section class="pin-form pin-content">
+    <p>{{ boardsShow.currentPin.title }}</p>
     <img ng-if="boardsShow.currentPin.type === 'image'" ng-src="{{ boardsShow.currentPin.link }}">
     <div class="iframe-wrapper" ng-if="boardsShow.currentPin.type === 'youtube'" >
       <youtube link="{{ boardsShow.currentPin.link }}" width="100%" height="100%"></youtube>

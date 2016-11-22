@@ -98,6 +98,9 @@ header {
   background-color: $light-gray;
   padding: 20px;
   @include span-columns(6);
+  p {
+    text-align: center;
+  }
   li {
     list-style-type: none;
   }
