@@ -279,6 +279,20 @@ header {
         display: block;
       }
     }
+    .cover {
+      display: none;
+      position: absolute;
+
+    }
+    &:hover {
+      .cover {
+        background-size: cover;
+        background-color: red;
+        background-position: center;
+        position: relative;
+        display: block;
+      }
+    }
 
     .pin-image {
       position: absolute;
@@ -392,18 +406,18 @@ header {
 //   }
 // }
 
-.drag-drop {
-  height: 300px;
-  width: 300px;
-  background-color: green;
-  border-radius: 0px;
-  line-height: 0;
-
-  img {
-    width: 100%;
-  }
-
-  &.active {
-    background-color: grey;
-  }
-}
+// .drag-drop {
+//   height: 300px;
+//   width: 300px;
+//   background-color: green;
+//   border-radius: 0px;
+//   line-height: 0;
+//
+//   img {
+//     width: 100%;
+//   }
+//
+//   &.active {
+//     background-color: grey;
+//   }
+// }
