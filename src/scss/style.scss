@@ -32,11 +32,8 @@ h1 {
 main {
   @include outer-container;
   padding: 30px 20px 0;
-  min-height: calc(100vh - 55px);
-  overflow: scroll;
-  word-break: break-all;
-
-}
+  min-height: calc(100vh - 50px);
+  }
 
 header {
   border-top: 5px solid $brand-color;
@@ -60,7 +57,6 @@ header {
           }
           &.active {
             position:relative;
-            opacity: 1;
             &:after {
               content: '';
               position: absolute;
@@ -166,16 +162,12 @@ header {
   .board-single {
     @include span-columns(3);
     @include omega(4n);
-    @media (max-width: 767px) {
-      @include span-columns(6);
-      @include omega(2n);
-    }
-    overflow: scroll;
     background-color: $light-gray;
     padding: 10px;
     margin-bottom: 20px;
     height: 350px;
     word-break: break-all;
+    overflow: scroll;
     h2 {
       font-weight: bold;
       margin-bottom: 5px;
@@ -224,7 +216,7 @@ header {
 }
 
 .background-image {
-  height: calc(100vh - 55px);
+  height: calc(100vh - 50px);
   width: 100vw;
   background-position: center;
   background-size: cover;
@@ -310,11 +302,12 @@ header {
       top: 10px;
       left: 10px;
       margin-right: 10px;
-      color: white;
+      color: black;
       // font-size: 20px;
-      border-radius: 3px;
       padding: 12px 24px 12px 24px;
-      background-color: #6DECAF;
+      background-color: $light-gray;
+      width: 92%;
+
     }
     &:hover {
       .pin-info {
@@ -332,20 +325,7 @@ header {
         display: block;
       }
     }
-    .cover {
-      display: none;
-      position: absolute;
 
-    }
-    &:hover {
-      .cover {
-        background-size: cover;
-        background-color: red;
-        background-position: center;
-        position: relative;
-        display: block;
-      }
-    }
 
     .pin-image {
       position: absolute;
@@ -462,18 +442,18 @@ header {
 //   }
 // }
 
-// .drag-drop {
-//   height: 300px;
-//   width: 300px;
-//   background-color: green;
-//   border-radius: 0px;
-//   line-height: 0;
-//
-//   img {
-//     width: 100%;
-//   }
-//
-//   &.active {
-//     background-color: grey;
-//   }
-// }
+.drag-drop {
+  height: 300px;
+  width: 300px;
+  background-color: green;
+  border-radius: 0px;
+  line-height: 0;
+
+  img {
+    width: 100%;
+  }
+
+  &.active {
+    background-color: grey;
+  }
+}
