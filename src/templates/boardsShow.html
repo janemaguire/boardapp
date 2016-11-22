@@ -30,10 +30,14 @@
           <drag-drop base64="upload.data.base64"></drag-drop>
         </imageuploader> -->
         <input type="text" name="title" placeholder="Title" ng-model="boardsShow.newPin.title" class="u-full-width">
-        <select class="typeSelect" ng-model="boardsShow.newPin.type">
-          <option value="image">Image</option>
-          <option value="youtube">YouTube</option>
+        <select ng-model="boardsShow.newPin.type"
+          ng-init="boardsShow.newPin.type = boardsShow.newPin.type || 'image'"
+          ng-options="option.value as option.name for option in [{name:'Image', value:'image'}, {name:'Video', value:'video'}]">
         </select>
+        <!-- <select class="typeSelect" ng-model="boardsShow.newPin.type">
+          <option value="image" selected="selected">Image</option>
+          <option value="youtube">YouTube</option>
+        </select> -->
         <input type="text" name="link" placeholder="Link" ng-model="boardsShow.newPin.link" class="u-full-width">
       </div>
       <button>Create</button>
@@ -44,7 +48,7 @@
 
 <!-- SHOW PIN CONTENT FORM -->
 <div class="overlay" ng-if="boardsShow.pinContentVisible">
-  <section class="pin-form pin-content">
+  <section class="pin-form pin-content" ng-class="{youtube: boardsShow.currentPin.type === 'youtube'}">
     <img ng-if="boardsShow.currentPin.type === 'image'" ng-src="{{ boardsShow.currentPin.link }}">
     <div class="iframe-wrapper" ng-if="boardsShow.currentPin.type === 'youtube'" >
       <youtube link="{{ boardsShow.currentPin.link }}" width="100%" height="100%"></youtube>
@@ -60,7 +64,7 @@
   <section class="pin-form">
     <form>
       <input type="text" name="title" placeholder="Title" ng-model="boardsShow.currentPin.title" class="u-full-width">
-      <select class="typeSelect" ng-model="boardsShow.newPin.type">
+      <select class="typeSelect" ng-model="boardsShow.currentPin.type">
         <option value="image">Image</option>
         <option value="youtube">YouTube</option>
       </select>

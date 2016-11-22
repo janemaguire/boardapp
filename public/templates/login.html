@@ -1,5 +1,9 @@
-<div class="background-image" style="background-image:url('images/testing-bg.jpeg')">
+<div class="background-image" style="background-image:url('images/bg.jpg')">
+
   <section class="login">
+    <h1>
+      Bored? Make a Board
+    </h1>
     <form novalidate ng-submit="login.submit()">
       <div class="row">
         <label>Email</label>
@@ -13,13 +17,11 @@
     </form>
     <div class="social">
       <button>
-        <img src="images/facebook.png" alt="Logo image" ng-click="login.authenticate('facebook')"><br>Login </br>with Facebook
-    <!-- <button ng-click="login.authenticate('facebook')">Login with Facebook</button> -->
+        <img src="images/facebook.png" alt="Logo image" ng-click="login.authenticate('facebook')">Login with</br>Facebook
       </button>
       <button>
-        <img src="images/instagram.png" alt="Logo image" ng-click="login.authenticate('instagram')"><br>Login</br>with Instagram
+        <img src="images/instagram.png" alt="Logo image" ng-click="login.authenticate('instagram')">Login with</br>Instagram
       </button>
     </div>
-    <!-- <button ng-click="login.authenticate('instagram')">Login with Instagram</button> -->
   </section>
 </div>
