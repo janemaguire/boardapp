@@ -2,16 +2,17 @@
   <h3>Here are the boards you are following...</h3>
   <ul class="boards">
     <li ng-repeat="board in boardsFollowing.all" class="board-single">
-      <a ui-sref="boardsShow({ id: board._id })">
+      <board-card board="board"></board-card>
+      <!-- <a ui-sref="boardsShow({ id: board._id })">
         <div class="tiles">
           <ul>
-            <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
+            <li ng-repeat="pin in board.pins | limitTo : 3" ng-if="pin.type === 'image'" style="background-image:url('{{ pin.link }}')"></li>
           </ul>
         </div>
         <h2>{{ board.title }}</h2>
         <h3>Board by: {{ board.user.username }}</h3>
         <h4>Tags:{{ board.user.tags}}</h4>
-      </a>
+      </a> -->
     </li>
   </ul>
 </section>
