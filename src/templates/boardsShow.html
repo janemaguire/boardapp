@@ -33,7 +33,7 @@
         <input type="text" name="title" placeholder="Title" ng-model="boardsShow.newPin.title" class="u-full-width">
         <select ng-model="boardsShow.newPin.type"
           ng-init="boardsShow.newPin.type = boardsShow.newPin.type || 'image'"
-          ng-options="option.value as option.name for option in [{name:'Image', value:'image'}, {name:'Video', value:'youtube'}]">
+          ng-options="option.value as option.name for option in [{name:'Image', value:'image'}, {name:'Video', value:'video'}]">
         </select>
         <!-- <select class="typeSelect" ng-model="boardsShow.newPin.type">
           <option value="image" selected="selected">Image</option>
@@ -55,7 +55,7 @@
     <div class="iframe-wrapper" ng-if="boardsShow.currentPin.type === 'youtube'" >
       <youtube link="{{ boardsShow.currentPin.link }}" width="100%" height="100%"></youtube>
     </div>
-    <button type="button" name="cancel" ng-click="boardsShow.hidePinContent()">Close</button>
+    <button type="button" name="git " ng-click="boardsShow.hidePinContent()">Close</button>
     <button type="button" name="editPin" ng-click="boardsShow.showEditForm(boardsShow.currentPin)">Edit Pin</button>
     </section>
   </div>
