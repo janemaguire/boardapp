@@ -1,8 +1,8 @@
 angular.module('boardApp')
   .controller('MainController', MainController);
 
-MainController.$inject = ['$auth', '$state'];
-function MainController($auth, $state) {
+MainController.$inject = ['$auth', '$state', '$rootScope'];
+function MainController($auth, $state, $rootScope) {
   const main = this;
   main.isLoggedIn = $auth.isAuthenticated;
 
@@ -13,4 +13,11 @@ function MainController($auth, $state) {
       });
   }
   main.logout = logout;
+
+  $rootScope.$on('$stateChangeStart', (e, toState) => {
+    if(!$auth.isAuthenticated() && toState.name !== 'login' && toState.name !== 'register') {
+      e.preventDefault();
+      $state.go('login');
+    }
+  });
 }

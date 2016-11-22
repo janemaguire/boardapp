@@ -58,7 +58,7 @@ function Router($stateProvider, $urlRouterProvider) {
      controller: 'PinsShowController as pinsShow'
    });
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/login');
 }
 
 Auth.$inject = ['$authProvider'];
