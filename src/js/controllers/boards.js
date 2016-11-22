@@ -50,7 +50,9 @@ UserBoardsController.$inject = ['Board', '$auth', '$state'];
 function UserBoardsController(Board, $auth, $state) {
   const userBoards = this;
   userBoards.formEditVisible = false;
+  userBoards.deleteVerificationVisible = false;
   userBoards.currentBoard;
+  userBoards.deleteBoard;
 
   const payload = $auth.getPayload();
   userBoards.all = Board.query({ user: payload._id });
@@ -69,18 +71,32 @@ function UserBoardsController(Board, $auth, $state) {
     Board.update({ id: currentBoard._id, boardId: $state.params.id }, currentBoard);
   }
 
-  userBoards.showEditForm = showEditForm;
-  userBoards.hideEditForm = hideEditForm;
-  userBoards.updateBoard = updateBoard;
+  //SHOW DELETE VERIFICATION
+  function showDeleteVerification(board) {
+    userBoards.deleteBoard = board;
+    console.log('clicked', userBoards.deleteBoard);
+    userBoards.deleteVerificationVisible = true;
+  }
+
+  //HIDE DELETE VERIFICATION
+  function hideDeleteVerification() {
+    userBoards.deleteVerificationVisible = false;
+  }
 
   //DELETE BOARD
-  function deleteBoard(board) {
-    console.log('clicked!', board);
-    board.$remove(() => {
+  function deleteBoard() {
+    console.log('DELETED!', userBoards.deleteBoard);
+    userBoards.deleteBoard.$remove(() => {
       $state.reload();
     });
   }
+
   userBoards.delete = deleteBoard;
+  userBoards.showDeleteVerification = showDeleteVerification;
+  userBoards.showEditForm = showEditForm;
+  userBoards.hideEditForm = hideEditForm;
+  userBoards.updateBoard = updateBoard;
+  userBoards.hideDeleteVerification = hideDeleteVerification;
 }
 
 //SHOW BOARDS CONTROLLER
