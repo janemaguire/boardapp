@@ -2,9 +2,11 @@
 <section>
   <h1>{{ boardsShow.board.title }}</h1>
   <h6>{{ boardsShow.board.description }}</h1>
-  <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
-  <button ng-click="boardsShow.followBoard()">Follow Board</button>
-  <button ng-click="boardsShow.unfollowBoard()">Unfollow Board</button>
+  <button ng-show="boardsShow.isOwnBoard" ng-click="boardsShow.showCreateForm()">Add Pin</button>
+  <div ng-hide="boardsShow.isOwnBoard">
+    <button ng-hide="boardsShow.following" ng-click="boardsShow.followBoard()">Follow Board</button>
+    <button ng-show="boardsShow.following" ng-click="boardsShow.unfollowBoard()">Unfollow Board</button>
+  </div>
   <ul class="board">
     <li ng-repeat="pin in boardsShow.board.pins">
       <div class="pin-image" ng-if="pin.type === 'image'" style="background-image:url('{{ pin.link }}')" ng-click="boardsShow.showPin(pin)"></div>
