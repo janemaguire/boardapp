@@ -93,6 +93,7 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   boardsShow.isOwnBoard = false;
   boardsShow.formVisible = false;
   boardsShow.formEditVisible = false;
+  boardsShow.showPinContent = false;
   boardsShow.board = Board.get($state.params, () => {
     if(boardsShow.board.followedBy.indexOf(userId)>-1) {
       boardsShow.following = true;
@@ -159,10 +160,26 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   function showEditForm(pin) {
     boardsShow.formEditVisible = true;
     boardsShow.currentPin = pin;
+    boardsShow.pinContentVisible = false;
   }
 
   function hideEditForm() {
     boardsShow.formEditVisible = false;
+  }
+
+  function showPinContent(pin) {
+    boardsShow.currentPin = pin;
+    console.log('clicked!', pin);
+    boardsShow.pinContentVisible = true;
+  }
+
+  function hidePinContent() {
+    boardsShow.pinContentVisible = false;
+  }
+
+  function showPin(pin) {
+    console.log('clicked!', pin);
+    showEditForm(pin);
   }
 
   function deletePin(pin) {
@@ -174,12 +191,6 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   }
 
   boardsShow.deletePin = deletePin;
-
-  function showPin(pin) {
-    console.log('clicked!', pin);
-
-    showEditForm(pin);
-  }
 
   //UPDATE BOARD CONTROLLER WITH EDIT PIN
   function updateBoard(updatedPin) {
@@ -214,6 +225,9 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   boardsShow.hideEditForm = hideEditForm;
   boardsShow.createPin = createPin;
   boardsShow.showPin = showPin;
+  boardsShow.showPinContent = showPinContent;
+  boardsShow.hidePinContent = hidePinContent;
+
 }
 
 //EDIT BOARD
