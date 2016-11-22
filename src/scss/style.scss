@@ -185,6 +185,12 @@ header {
     button {
       font-size: 12px;
     }
+    iframe {
+      @include position(absolute, 0 0 0 0);
+    }
+    .youtube-overlay {
+      @include position(absolute, 0 0 0 0);
+    }
     .tiles {
       margin-bottom: 10px;
       ul {
