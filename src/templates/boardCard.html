@@ -1,0 +1,10 @@
+<a ui-sref="boardsShow({ id: board._id })"
+  <div class="tiles">
+    <ul>
+      <li ng-repeat="image in images track by $index | limitTo : 3" style="background-image:url({{image}})"></li>
+    </ul>
+  </div>
+  <h2>{{ board.title }}</h2>
+  <h3>Created by {{ board.user.username }}</h3>
+  <p>Tags: {{ board.tags }}</p>
+</a>
