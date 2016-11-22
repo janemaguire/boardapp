@@ -10,7 +10,8 @@
         </ul>
       </div>
       <h2>{{ board.title }}</h2>
-      <h3>{{ board.user.username }}</h3>
+      <h3>Created by {{ board.user.username }}</h3>
+      <p>Tags: {{ board.tags }}</p>
     </a>
     <button ng-click="userBoards.showEditForm(board)">Edit</button>
     <button ng-click="userBoards.delete(board)">Delete</button>

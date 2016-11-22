@@ -1,5 +1,6 @@
 <section>
-  <input type="text" ng-model="boardsIndex.queryString">
+  <h2>Search for boards....</h2>
+  <input type="text" ng-model="boardsIndex.queryString" placeholder="Titles, tags, users">
   <ul class="boards">
     <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter " class="board-single">
       <a ui-sref="boardsShow({ id: board._id })"
@@ -9,8 +10,8 @@
           </ul>
         </div>
         <h2>{{ board.title }}</h2>
-        <h3>{{ board.user.username }}</h3>
-        <p>{{ board.tags }}</p>
+        <h3>Created by {{ board.user.username }}</h3>
+        <p>Tags: {{ board.tags }}</p>
       </a>
     </li>
   </ul>
