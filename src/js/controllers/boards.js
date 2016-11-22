@@ -89,10 +89,19 @@ function BoardsShowController(Board, Pin, $state, $auth) {
   const boardsShow = this;
   const payload = $auth.getPayload();
   const userId = payload._id ;
-  let followCount = 1;
+  boardsShow.following = false;
+  boardsShow.isOwnBoard = false;
   boardsShow.formVisible = false;
   boardsShow.formEditVisible = false;
-  boardsShow.board = Board.get($state.params);
+  boardsShow.board = Board.get($state.params, () => {
+    if(boardsShow.board.followedBy.indexOf(userId)>-1) {
+      boardsShow.following = true;
+    }
+    if(boardsShow.board.user._id === userId) {
+      boardsShow.isOwnBoard = true;
+      console.log(true);
+    }
+  });
 
   //ADD PIN CONTROLLER
   boardsShow.newPin = {};
@@ -179,11 +188,11 @@ function BoardsShowController(Board, Pin, $state, $auth) {
 
   //FOLLOW BOARD
   function followBoard() {
-    console.log('board not already followed');
     boardsShow.board.followedBy.push(userId);
 
     boardsShow.board.$update((board) => {
       console.log('succes, followed board:', board);
+      boardsShow.following = true;
     });
   }
 
@@ -194,6 +203,7 @@ function BoardsShowController(Board, Pin, $state, $auth) {
 
     boardsShow.board.$update((board) => {
       console.log('succes, unfollowed board:', board);
+      boardsShow.following = false;
     });
   }
 
