@@ -3,6 +3,8 @@
   <h1>{{ boardsShow.board.title }}</h1>
   <h6>{{ boardsShow.board.description }}</h1>
   <button ng-click="boardsShow.showCreateForm()">Add Pin</button>
+  <button ng-click="boardsShow.followBoard()">Follow Board</button>
+  <button ng-click="boardsShow.unfollowBoard()">Unfollow Board</button>
   <ul class="board">
     <li ng-repeat="pin in boardsShow.board.pins">
       <div class="pin-image" ng-if="pin.type === 'image'" style="background-image:url('{{ pin.link }}')" ng-click="boardsShow.showPin(pin)"></div>

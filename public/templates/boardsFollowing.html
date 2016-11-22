@@ -1,0 +1,9 @@
+<section>
+  <h3>Here are the baords you are following...</h3>
+  <li ng-repeat="board in boardsFollowing.all">
+    <a ui-sref="boardsShow({ id: board._id })">
+      <h1>{{ board.title }}</h1>
+      <h2>Pinned by: {{ board.user.username }}</h2>
+    </a>
+  </li>
+</section>

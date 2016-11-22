@@ -2,7 +2,7 @@
   <input type="text" ng-model="boardsIndex.queryString">
   <ul class="boards">
     <li ng-repeat="board in boardsIndex.all | filter: boardsIndex.filter " class="board-single">
-      <a ui-sref="boardsShow({ id: board._id })">
+      <a ui-sref="boardsShow({ id: board._id })"
         <div class="tiles">
           <ul>
             <li ng-repeat="pin in board.pins | limitTo : 3" style="background-image:url('{{pin.link}}')"></li>
