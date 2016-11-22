@@ -15,7 +15,11 @@ function BoardsIndexController(Board){
 
   function filter(board) {
     const regex = new RegExp(boardsIndex.queryString, 'i');
-    return regex.test(board.title) || regex.test(board.tags);
+    const pinTitles = board.pins.map((pin) => {
+      return pin.title;
+    }).join(', ');
+
+    return regex.test(board.title) || regex.test(board.tags) || regex.test(pinTitles);
   }
 
   boardsIndex.filter = filter;
