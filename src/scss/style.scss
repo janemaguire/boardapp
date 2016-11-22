@@ -15,6 +15,7 @@ img {
   max-width: 100%;
 }
 
+
 .editFormButton {
   display: inline-block;
 }
@@ -47,7 +48,7 @@ header {
     padding: 0 20px;
     ul{
       li {
-        line-height: 45px;
+        line-height: 50px;
         display: inline-block;
         float: right;
         margin-left: 10px;
@@ -174,7 +175,7 @@ header {
 }
 
 .boards {
-  margin-top: 30px;
+  margin-top: 10px;
   .board-single {
     @include span-columns(3);
     @include omega(4n);
