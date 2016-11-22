@@ -61,7 +61,7 @@ function facebook(req, res) {
 function instagram(req, res) {
   // Request an access token
   request.get({
-    url: 'https://api.instagram.com/oauth/authorize/?client_id=	64171eadf0914dd7bf7839bc034e42e0&redirect_uri=http://localhost:8000&response_type=code'
+    url: 'https://api.instagram.com/oauth/authorize/?client_id=	64171eadf0914dd7bf7839bc034e42e0&redirect_uri=https://boiling-ocean-15737.herokuapp.com&response_type=code'
     // qs: {
     //   code: req.body.code,
     //   client_id: process.env.INSTAGRAM_APP_ID,
