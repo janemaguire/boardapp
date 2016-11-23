@@ -41,7 +41,16 @@ function boardsUpdate(req, res) {
     board.save((err, board) => {
       console.log(err);
       if(err) return res.status(400).json({ error: err });
-      res.json(board);
+      Board
+        .populate(board, 'user')
+        .then(
+          (board) => {
+            res.json(board);
+          },
+          (error) => {
+            res.status(400).json({ error: error });
+          }
+      );
     });
   });
 }
