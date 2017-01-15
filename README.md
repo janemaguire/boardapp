@@ -2,6 +2,8 @@
 
 Bored is a place to collect your favourite things. Users can pin images and videos to boards in order to share collections with other people or to use as inspiration.
 
+![](/src/images/bored1.png)
+
 With full CRUD actions and secure routes, Bored allows users to create, update and delete their own boards and pins. Users can also see and search other boards and pins from other users.
 
 Users can login in using Facebook, Instagram or email and password.
@@ -25,6 +27,8 @@ AngularJS | BCrypt | Bourbon | Body Parser | Bower | Express | Gulp | HTML | Jav
 The idea for the app came from the notion of a physical pin board where you could collect together memories, souvenirs or inspirational items. Wouldn't it be great if you could do this online?
 
 We started off by getting our heads around user journeys for the features we would like to have, and drawing wireframes. Then we planned out our time using Trello to list tasks, blockers and extra features that would come after MVP. Once it was time to start coding we found pair programming helped us solve problems more quickly and with better quality code.
+
+![](/src/images/bored3.png)
 
 ###Challenges
 * Deciding on our models for users, boards and pins was complicated. In the end we had users as a referenced record in the board schema and pins as an embedded record in the board schema.
